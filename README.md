@@ -1,16 +1,16 @@
-#Raapins
+# Raapins
 
 Raapins is a deadly simple restful api async server using memory as storage.
 
 No external dependencies required.
 
-##Archi
+## Archi
 
 * server
 * controller
 * service
 
-##Workflow
+## Workflow
 
 Server on data request collects datas.
 
@@ -23,11 +23,11 @@ Controller execute service callback then fires error or data event.
 Server on event returns response with code status and cors headers.
 
 
-##Start
+## Start
 
 node server.js
 
-##Pathname
+## Pathname
 
 http://host/{entity}/{id}
 
@@ -35,37 +35,37 @@ http://host/{entity}/{id}
 * {id} is optional for get, mandatory for other verbs.
 
 
-##Verbs
+## Verbs
 
-###Get
+### Get
 
 returns either an item or a collection entity.
 
-###Post
+### Post
 
 Adds an item entity.
 
-###Delete
+### Delete
 
 Remove an item.
 
-###Put
+### Put
 
 Update an item.
 
-##Todo
+## Todo
 
-###Create
+### Create
 
 * App
 * Config
 * Entity
 
-###Modify
+### Modify
 
 * Service methods
 
-###Extension
+### Extension
 
 * Model
 * Sql storage
