@@ -1,0 +1,14 @@
+{
+  "name": "Raapins",
+  "version": "1.0.0",
+  "keywords": [
+    "restful",
+    "async",
+    "api",
+    "node",
+    "server"
+  ],
+  "author": "pierrefromager",
+  "contributors": [],
+  "dependencies": {}
+}
