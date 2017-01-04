@@ -1,8 +1,9 @@
 /**
  * Front controller
  */
+const restService = require( './service.js');
 const ctrlEmitter = require('events').EventEmitter;
-const restService = require('./service.js');
+
 const service = new restService();
 const controller = new ctrlEmitter();
 
@@ -23,23 +24,6 @@ controller.params = (request) => {
  */
 controller.methods = () => {
     return ['get', 'put', 'patch', 'delete', 'post'];
-}
-
-/**
- * headers
- * 
- * @returns {nm$_controller.controller.headers.controllerAnonym$1}
- */
-controller.headers = () => {
-    return {
-        'Access-Control-Allow-Origin': '*' ,
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Credentials' : false,
-        'Access-Control-Allow-Methods' : 'POST, GET, PUT, DELETE, PATCH',
-        'Access-Control-Max-Age' : '3600', // 1 hour
-        'Access-Control-Allow-Headers' : 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept',
-        'Content-Type': 'application/json'
-    }
 }
 
 /**
