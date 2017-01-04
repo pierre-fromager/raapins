@@ -5,7 +5,8 @@ const server = http.createServer()
     .setTimeout(config.server.timeout);
 const qs = require('querystring');
 const controller = require('./lib/controller.js');
-const cors = require('./lib/cors.js');
+const corsClass = require('./lib/cors.js');
+const cors = new corsClass();
 
 server.on('request', (req, res) => {
     
