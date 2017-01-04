@@ -1,5 +1,9 @@
+const config = require('./lib/config.js');
 const http = require('http');
-const server = http.createServer().listen(8080, '127.0.0.1').setTimeout(500);
+const server = http.createServer()
+    .listen(config.server.port, config.server.address)
+    .setTimeout(config.server.timeout);
+
 const qs = require('querystring');
 const controller = require('./lib/controller.js');
 
@@ -26,5 +30,6 @@ server.on('request', (req, res) => {
         controller.handle(req, res, qs.parse(reqRawData));
     });
 });
-process.setMaxListeners(1000);
-console.log('Server is running on 8080');
+
+process.setMaxListeners(config.process.maxlisteners);
+console.log(config.getServerStartMessage());
