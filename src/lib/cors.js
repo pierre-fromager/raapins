@@ -1,8 +1,8 @@
 /**
- * cors
+ * Cors
  * 
  */
-class cors {
+class Cors {
 
     /**
      * constructor
@@ -29,5 +29,7 @@ class cors {
     }
 
 }
+
+cors = (typeof(cors) == 'function') ? cors : new Cors();
 
 module.exports = cors;

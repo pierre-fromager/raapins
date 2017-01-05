@@ -3,10 +3,10 @@ const http = require('http');
 const server = http.createServer()
     .listen(config.server.port, config.server.address)
     .setTimeout(config.server.timeout);
+    
 const qs = require('querystring');
+const cors = require('./lib/cors.js');
 const controller = require('./lib/controller.js');
-const corsClass = require('./lib/cors.js');
-const cors = new corsClass();
 
 server.on('request', (req, res) => {
     
