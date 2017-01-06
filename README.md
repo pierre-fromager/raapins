@@ -12,16 +12,11 @@ No external dependencies required.
 
 ## Workflow
 
-Server on data request collects datas.
-
-On end it registers (data, erros) events listener trough controller.
-
-Controller on data, validates verb to service method and register callback with params.
-
-Controller execute service callback then fires error or data event.
-
-Server on event returns response with code status and cors headers.
-
+Server on data request collects datas.  
+On end it registers (data, erros) events listener trough controller.  
+Controller on data, validates verb to service method and register callback with params.  
+Controller execute service callback then fires error or data event.  
+Server on event returns response with code status and cors headers.  
 
 ## Start
 
@@ -58,32 +53,31 @@ Update an item.
 ### Create
 
 * App
-* Config
+* Router
 * Entity
 
 ### Modify
 
-* Service methods
+* Service methods POST hydrator
 
 ### Extension
 
 * Model
-* Sql storage
-* Redis storage
+* Storage adapter (Sql, Redis)
 
 ## Tests
 
 ### Purpose
 
-For testing purpose in src/tests you can play with client.js.
+In src/tests you can play with client.js.
 
-Some required dependencies should be satisfied, mainly async and newman.
+Some required dependencies should be satisfied, mainly async and newman; use npm i.
 
-This simulate // request load connections.
+This simulates by default 100// requests.
 
 ### Features
 
-Newman let you replay Postman's usecase collection as runner.
+Newman let you replay Postman's collection in runner mode.
 Async let you play runner in async mode (//). 
 
 ### Settings
