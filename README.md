@@ -31,21 +31,10 @@ http://host/{entity}/{id}
 
 ## Verbs
 
-#### Get
-
-returns either an item or a collection entity.
-
-#### Post
-
-Adds an item entity.
-
-#### Delete
-
-Remove an item.
-
-#### Put
-
-Update an item.
+* **Get** returns either an item or a collection entity.
+* **Post** Adds an item entity.
+* **Delete** Remove an item.
+* **Put** Update an item.
 
 ## Todo
 
