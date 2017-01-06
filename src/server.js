@@ -7,8 +7,13 @@ const server = http.createServer()
 const qs = require('querystring');
 const cors = require('./lib/cors.js');
 const controller = require('./lib/controller.js');
+controller.setMaxListeners(config.process.maxlisteners);
 
 server.on('request', (req, res) => {
+    
+    server.getConnections(function(error, count) {
+        console.log('connection count : ' + count);
+    });
     
     let reqRawData = '';
     
@@ -18,12 +23,12 @@ server.on('request', (req, res) => {
         
     req.on('end', () => {
         
-        controller.on('data', (data) => {
+        controller.once('data', (data) => {
             res.writeHead(200, cors.getHeaders());
             res.end(JSON.stringify(data));
         });
 
-        controller.on('error', (errorType) => {
+        controller.once('error', (errorType) => {
             res.writeHead(errorType, cors.getHeaders());
             res.end();
         });
@@ -32,5 +37,4 @@ server.on('request', (req, res) => {
     });
 });
 
-process.setMaxListeners(config.process.maxlisteners);
 console.log(config.getServerStartMessage());
