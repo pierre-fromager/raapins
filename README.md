@@ -1,7 +1,6 @@
 # Raapins
 
-Raapins is a deadly simple restful api async server using memory as storage.
-
+Raapins is a deadly simple restful api async server using memory as storage.  
 No external dependencies required.
 
 ## Archi
@@ -69,20 +68,19 @@ Update an item.
 
 ### Purpose
 
-In src/tests you can play with client.js.
-
-Some required dependencies should be satisfied, mainly async and newman; use npm i.
-
+In src/tests you can play with client.js.  
+Some required dependencies should be satisfied, mainly async and newman; use npm i.  
 This simulates by default 100// requests.
 
 ### Features
 
-Newman let you replay Postman's collection in runner mode.
-Async let you play runner in async mode (//). 
+Newman let you replay Postman's collection in runner mode.  
+Async let you play runner in async mode (//).  
 
 ### Settings
 
 Ensure that postman collection and environnement match your config server @ip and port settings.
 
 ### Client test
+
 node client.js
