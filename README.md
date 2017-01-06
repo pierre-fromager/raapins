@@ -74,4 +74,6 @@ Ensure that postman collection and environnement match your config server @ip an
 
 #### Client test
 
+```bash
 node client.js
+```
