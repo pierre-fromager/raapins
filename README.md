@@ -3,7 +3,7 @@
 Raapins is a deadly simple restful api async server using memory as storage.  
 No external dependencies required.
 
-## Archi
+## Arch
 
 * server
 * controller
@@ -31,56 +31,56 @@ http://host/{entity}/{id}
 
 ## Verbs
 
-### Get
+#### Get
 
 returns either an item or a collection entity.
 
-### Post
+#### Post
 
 Adds an item entity.
 
-### Delete
+#### Delete
 
 Remove an item.
 
-### Put
+#### Put
 
 Update an item.
 
 ## Todo
 
-### Create
+#### Create
 
 * App
 * Router
 * Entity
 
-### Modify
+#### Modify
 
 * Service methods POST hydrator
 
-### Extension
+#### Extension
 
 * Model
 * Storage adapter (Sql, Redis)
 
 ## Tests
 
-### Purpose
+#### Purpose
 
 In src/tests you can play with client.js.  
 Some required dependencies should be satisfied, mainly async and newman; use npm i.  
 This simulates by default 100// requests.
 
-### Features
+#### Features
 
 Newman let you replay Postman's collection in runner mode.  
 Async let you play runner in async mode (//).  
 
-### Settings
+#### Settings
 
 Ensure that postman collection and environnement match your config server @ip and port settings.
 
-### Client test
+#### Client test
 
 node client.js
