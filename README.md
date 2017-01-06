@@ -69,4 +69,26 @@ Update an item.
 
 * Model
 * Sql storage
-* Redis storage 
+* Redis storage
+
+## Tests
+
+### Purpose
+
+For testing purpose in src/tests you can play with client.js.
+
+Some required dependencies should be satisfied, mainly async and newman.
+
+This simulate // request load connections.
+
+### Features
+
+Newman let you replay Postman's usecase collection as runner.
+Async let you play runner in async mode (//). 
+
+### Settings
+
+Ensure that postman collection and environnement match your config server @ip and port settings.
+
+### Client test
+node client.js
