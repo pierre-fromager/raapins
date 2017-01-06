@@ -19,7 +19,9 @@ Server on event returns response with code status and cors headers.
 
 ## Start
 
+```bash
 node server.js
+```
 
 ## Pathname
 
