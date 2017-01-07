@@ -59,13 +59,13 @@ const profiler = {
         return this;
     },
     /**
-     * ellapse
+     * elapse
      * 
      * @param {String} markin
      * @param {String} markout
      * @returns {Number}
      */
-    ellapse(markin, markout) {
+    elapse(markin, markout) {
         return this.stack[markout] - this.stack[markin];
     }
 }
