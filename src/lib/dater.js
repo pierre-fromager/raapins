@@ -15,7 +15,7 @@ const dater = {
      * @returns {String}
      */
     zPad(v) {
-        return (v < this.ten) ? padvalue + v : v;
+        return (v < this.ten) ? this.zero + v : v;
     },    
     /**
      * getDateTime
