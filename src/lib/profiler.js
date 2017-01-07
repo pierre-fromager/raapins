@@ -11,13 +11,12 @@ const profiler = {
      */
     stack: {},
     /**
-     * microtime 
-     * return current ts as nano
-     * in that case we dont care about SIG nature
+     * nanotime 
+     * return current time as nano time, dont care about SIG event
      * 
      * @returns {Int}
      */
-    microtime() {
+    nanotime() {
         return process.hrtime()[1];
     },
     /**
@@ -36,7 +35,7 @@ const profiler = {
      * @param {String} markAdd
      */
     add(markAdd) {
-        this.stack[markAdd] = this.microtime();
+        this.stack[markAdd] = this.nanotime();
         return this;
     },
     /**
