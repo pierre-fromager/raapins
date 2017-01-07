@@ -1,7 +1,8 @@
 /**
  * profiler
  * 
- * calculate ellapse from 
+ * is fluent profiler marker/calculator for ts marker
+ * 
  */
 const profiler = {
     
@@ -36,6 +37,7 @@ const profiler = {
      */
     add(markAdd) {
         this.stack[markAdd] = this.microtime();
+        return this;
     },
     /**
      * remove
@@ -45,6 +47,16 @@ const profiler = {
      */
     remove(markRemove) {
         delete(this.stack[markRemove]);
+        return this;
+    },
+    /**
+     * reset
+     * 
+     * @returns {undefined}
+     */
+    reset() {
+        this.stack = {};
+        return this;
     },
     /**
      * ellapse
