@@ -5,13 +5,13 @@
  * 
  */
 const profiler = {
-    
     /**
-     * profiler stack container
+     * profiler stack
      */
     stack: {},
     /**
      * nanotime 
+     * 
      * return current time as nano time, dont care about SIG event
      * 
      * @returns {Int}
@@ -21,9 +21,10 @@ const profiler = {
     },
     /**
      * get
-     * returns either entire profiler stack or mark ts
      * 
-     * @param {type} mark
+     * returns either entire profiler stack or marked stack item
+     * 
+     * @param {String} mark
      * @returns {nm$_profiler.profiler.stack}
      */
     get(mark) {
@@ -33,6 +34,7 @@ const profiler = {
      * add
      * 
      * @param {String} markAdd
+     * @returns {nm$_profiler.profiler}
      */
     add(markAdd) {
         this.stack[markAdd] = this.nanotime();
@@ -42,7 +44,7 @@ const profiler = {
      * remove
      * 
      * @param {String} markRemove
-     * @returns {undefined}
+     * @returns {nm$_profiler.profiler}
      */
     remove(markRemove) {
         delete(this.stack[markRemove]);
@@ -51,7 +53,7 @@ const profiler = {
     /**
      * reset
      * 
-     * @returns {undefined}
+     * @returns {nm$_profiler.profiler}
      */
     reset() {
         this.stack = {};

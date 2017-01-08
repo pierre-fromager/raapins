@@ -1,27 +1,30 @@
 /**
- * color
- * 
+ * color ANSI
  */
 const color = {
+    
+    fg : 0,
+    bg : 0,
+    st : 0,
     /**
-     * Ansi color codes
+     * Ansi colors
      */
     codes : {
         black : 0,
-        red : 31,
-        green : 32,
-        orange : 33,
-        blue : 34,
+        red : 1,
+        green : 2,
+        orange : 3,
+        blue : 4,
     },
     /**
-     * Ansi styles codes
+     * Ansi styles
      */
     styles : {
         normal : 0,
         bold : 1,
         faint : 2,
         italic : 3,
-        undeline : 4,
+        underline : 4,
         slowblink : 5,
         rapidblick : 6,
         negative : 7,
@@ -35,15 +38,8 @@ const color = {
      * @param {string} mode
      * @returns {String}
      */
-    getAnsi(colorCode, mode){
-        var primaryFont = 10;
-        
-        mode = (mode) 
-            ? "\\x" + mode.toString(16)  + '['
-            : '\x1b[';
-        var cch = colorCode.toString(16);
-        console.log('ccc : ' + cch);
-        return mode + colorCode + 'm';
+    getAnsi(code){
+        return '\x1b[' + ((code => 30 && code <= 40) ? this.st : '') + code + 'm';
     },
     /**
      * get return ansi escaped text
@@ -53,13 +49,54 @@ const color = {
      * @param {type} mode
      * @returns {String}
      */
-    get(color, text, mode){
-        console.log(this.getAnsi(color, mode));
-        var colorizedText = this.getAnsi(color, mode) 
-            + text 
+    get(text, fg, bg, style) {
+        this.setFg(fg).setBg(bg).setSt(style);
+        return this.getAnsi(this.bg) + this.getAnsi(this.fg)
+            + text
             + this.getAnsi(this.codes.black);
-        return colorizedText;
     },
+    /**
+     * setFg
+     * 
+     * @param {Int} color
+     * @returns {nm$_color.color}
+     */
+    setFg(color){
+        color = (color) ? color : 0;
+        this.fg = 30 + color;
+        return this;
+    },
+    /**
+     * setBg
+     * 
+     * @param {Int} color
+     * @returns {nm$_color.color}
+     */
+    setBg(color){
+        color = (color) ? color : 0;
+        this.bg = 40 + color;
+        return this;
+    },
+    /**
+     * setSt
+     * 
+     * @param {Int} style
+     * @returns {nm$_color.color}
+     */
+    setSt(style){
+        style = (this.isArray(style)) ? style.join(';') : style;
+        this.st = (style) ? style + ';' : '';
+        return this;
+    },
+    /**
+     * isArray
+     * 
+     * @param {Variant} v
+     * @returns {Boolean}
+     */
+    isArray(v) {
+        return (!!v) && (v.constructor === Array);
+    }
 }
 
 module.exports = color;
