@@ -1,8 +1,10 @@
+const serviceManager = require('./service/manager');
+
 /**
  * service
  * 
  */
-class service {
+class service extends serviceManager {
     
     /**
      * constructor
@@ -12,38 +14,36 @@ class service {
      * @returns {nm$_rest.service}
      */
     constructor(storage, pK) {
-        this.storage = (storage) ? storage : {};
-        this.pK = (pK) ? pK : 0;
+        super(storage, pK);
     }
     
     /**
-     * noop
+     * svcGet
      * 
-     * @returns {undefined}
+     * @param {function} callback
+     * @param {array} params
+     * @returns {nm$_rest.service}
      */
-    noop(){};
-    
-    /**
-     * hydrate
-     * 
-     * @param {type} object
-     * @param {type} data
-     * @returns {Object}
-     */
-    hydrate(object, params, merge) {
-        let dK = 'data';
-        object[dK] = (merge) ? (object[dK] || {}) : {};
-        let iR = /^d+$/;
-        let fR = /^[+-]?\d+(\.\d+)?$/;
-        var k = Object.keys(params.payload);
-        for(var i=0, len = k.length; i<len; i++){
-            var v = params.payload[k[i]];
-            v = (iR.test(v)) ? parseInt(v) : v;
-            v = (fR.test(v)) ? parseFloat(v) : v;
-            object[dK][k[i]] = v;
+    svcGet(callback, params) {
+        let id = (params.id || null);
+        let entityName = (params.entityName || null);
+        callback = (callback || noop);
+        let collection = null;
+        if (id) {
+            collection = this.storage[id];
+        } else {
+            collection = [];
+            for (var i = 1; i <= this.pK; i++) {
+                if (this.storage[ i ]) {
+                    if (this.storage[i]['entityName'] == entityName)
+                        collection.push(this.storage[i]);
+                }
+            }
+            collection = (collection.length > 0) ? collection : null;
         }
-        return object;
-    }
+        callback(collection);
+        return(this);
+    };
     
     /**
      * svcPost
@@ -86,32 +86,6 @@ class service {
     }
     
     /**
-     * svcGet
-     * 
-     * @param {function} callback
-     * @param {array} params
-     * @returns {nm$_rest.service}
-     */
-    svcGet(callback, params) {
-        let id = (params.id || null);
-        let entityName = (params.entityName || null);
-        callback = (callback || noop);
-        let collection = [];
-        if (id) {
-            collection = this.storage[id];
-        } else {
-            for (var i = 1; i <= this.pK; i++) {
-                if (this.storage[ i ]) {
-                    if (this.storage[i]['entityName'] == entityName)
-                        collection.push(this.storage[i]);
-                }
-            }
-        }
-        callback(collection);
-        return(this);
-    };
-    
-    /**
      * svcPut
      * 
      * totaly rewite existing data
@@ -123,9 +97,11 @@ class service {
     svcPut(callback, params) {
         let id = (params.id || null);
         callback = (callback || noop);
-        let collection = [];
+        let collection = null;
         if (id && this.storage[id]) {
             collection = this.hydrate(this.storage[id], params, false);
+            console.log('Put');
+            console.log(collection);
         }
         callback(collection);
         return(this);
@@ -143,7 +119,7 @@ class service {
     svcPatch(callback, params) {
         let id = (params.id || null);
         callback = (callback || noop);
-        let collection = [];
+        let collection = null;
         if (id && this.storage[id]) {
             collection = this.hydrate(this.storage[id], params, true);
         }
