@@ -27,7 +27,7 @@ class service extends serviceManager {
     svcGet(callback, params) {
         let id = (params.id || null);
         let entityName = (params.entityName || null);
-        callback = (callback || noop);
+        callback = (callback || this.noop);
         let collection = null;
         if (id) {
             collection = this.storage[id];
@@ -53,7 +53,7 @@ class service extends serviceManager {
      * @returns {nm$_rest.service}
      */
     svcPost(callback, params) {
-        callback = (callback || noop);
+        callback = (callback || this.noop);
         let entity = {
             id: ++this.pK,
             entityName: params.entityName
@@ -76,7 +76,7 @@ class service extends serviceManager {
      */
     svcDelete(callback, params) {
         let id = (params.id || null);
-        callback = (callback || noop);
+        callback = (callback || this.noop);
         let svcity = (this.storage[id] || null);
         if (id && this.storage[id]) {
             delete this.storage[id];
@@ -96,12 +96,10 @@ class service extends serviceManager {
      */
     svcPut(callback, params) {
         let id = (params.id || null);
-        callback = (callback || noop);
+        callback = (callback || this.noop);
         let collection = null;
         if (id && this.storage[id]) {
             collection = this.hydrate(this.storage[id], params, false);
-            console.log('Put');
-            console.log(collection);
         }
         callback(collection);
         return(this);
@@ -118,7 +116,7 @@ class service extends serviceManager {
      */
     svcPatch(callback, params) {
         let id = (params.id || null);
-        callback = (callback || noop);
+        callback = (callback || this.noop);
         let collection = null;
         if (id && this.storage[id]) {
             collection = this.hydrate(this.storage[id], params, true);
