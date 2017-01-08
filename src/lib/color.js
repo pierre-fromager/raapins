@@ -32,21 +32,22 @@ const color = {
         crossedout : 9
     },
     /**
-     * getAnsi returns ansi escape seq
+     * getAnsi returns Ansi escape seq
      * 
-     * @param {int} colorCode
-     * @param {string} mode
+     * @param {Int} code
+     * @param {String} mode
      * @returns {String}
      */
     getAnsi(code){
         return '\x1b[' + ((code => 30 && code <= 40) ? this.st : '') + code + 'm';
     },
     /**
-     * get return ansi escaped text
+     * get
      * 
-     * @param {type} color
-     * @param {type} text
-     * @param {type} mode
+     * @param {String} text
+     * @param {Int} fg
+     * @param {Int} bg
+     * @param {Int} style
      * @returns {String}
      */
     get(text, fg, bg, style) {
