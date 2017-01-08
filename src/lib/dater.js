@@ -3,24 +3,24 @@
  * 
  */
 const dater = {
-    
     dsep : '-',
     tsep : ':',
-    zop : ' ',
+    zop : ' ',    
     /**
      * leftPad
      * 
-     * @param {type} v
-     * @returns {String}
+     * @param {Int} v
+     * @param {String} l
+     * @returns {nm$_dater.exports.leftPad.l|dater.leftPad.l|@var;l|String}
      */
-    leftPad(v,l) {
+    leftPad(v, l) {
         l = (l) ? l : '00';
         return (v + l).substring(0, l.length);
     },    
     /**
      * getDateTime
      * 
-     * @returns {Number|String}
+     * @returns {String}
      */
     getDateTime() {
         var date = new Date();
