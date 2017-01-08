@@ -3,19 +3,19 @@
  * 
  */
 const dater = {
+    
     dsep : '-',
     tsep : ':',
     zop : ' ',
-    zero : '0',
-    ten : 10,
     /**
-     * zPad
+     * leftPad
      * 
      * @param {type} v
      * @returns {String}
      */
-    zPad(v) {
-        return (v < this.ten) ? this.zero + v : v;
+    leftPad(v,l) {
+        l = (l) ? l : '00';
+        return (v + l).substring(0, l.length);
     },    
     /**
      * getDateTime
@@ -24,10 +24,13 @@ const dater = {
      */
     getDateTime() {
         var date = new Date();
-        return date.getFullYear() + this.dsep + this.zPad(date.getMonth() + 1) 
-            + this.dsep + this.zPad(date.getDate()) + this.zop + this.zPad(date.getHours()) 
-            + this.tsep + this.zPad(date.getMinutes()) + this.tsep 
-            + this.zPad(date.getSeconds()) + this.tsep + date.getMilliseconds();
+        return date.getFullYear() 
+            + this.dsep + this.leftPad(date.getMonth() + 1) 
+            + this.dsep + this.leftPad(date.getDate()) 
+            + this.zop + this.leftPad(date.getHours()) 
+            + this.tsep + this.leftPad(date.getMinutes()) 
+            + this.tsep + this.leftPad(date.getSeconds()) 
+            + this.tsep + this.leftPad(date.getMilliseconds(), '000');
     }
 }
 
