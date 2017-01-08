@@ -30,8 +30,9 @@ class service {
      * @param {type} data
      * @returns {Object}
      */
-    hydrate(object, params) {
-        object['data'] = {};
+    hydrate(object, params, merge) {
+        let dK = 'data';
+        object[dK] = (merge) ? (object[dK] || {}) : {};
         let iR = /^d+$/;
         let fR = /^[+-]?\d+(\.\d+)?$/;
         var k = Object.keys(params.payload);
@@ -39,7 +40,7 @@ class service {
             var v = params.payload[k[i]];
             v = (iR.test(v)) ? parseInt(v) : v;
             v = (fR.test(v)) ? parseFloat(v) : v;
-            object['data'][k[i]] = v;
+            object[dK][k[i]] = v;
         }
         return object;
     }
@@ -58,7 +59,7 @@ class service {
             entityName: params.entityName
         };
         this.storage[ entity.id ] = (params) 
-            ? this.hydrate(entity, params) 
+            ? this.hydrate(entity, params, true) 
             : entity;
         callback(entity);
         return(this);
@@ -67,6 +68,8 @@ class service {
     /**
      * svcDelete
      * 
+     * delete existing data
+     * 
      * @param {function} callback
      * @param {array} params
      * @returns {nm$_rest.service}
@@ -74,9 +77,9 @@ class service {
     svcDelete(callback, params) {
         let id = (params.id || null);
         callback = (callback || noop);
-        let svcity = (this.storage[ id ] || null);
-        if (id) {
-            delete this.storage[ id ];
+        let svcity = (this.storage[id] || null);
+        if (id && this.storage[id]) {
+            delete this.storage[id];
         }
         callback(svcity);
         return(this);
@@ -95,12 +98,12 @@ class service {
         callback = (callback || noop);
         let collection = [];
         if (id) {
-            collection = this.storage[ id ];
+            collection = this.storage[id];
         } else {
             for (var i = 1; i <= this.pK; i++) {
                 if (this.storage[ i ]) {
                     if (this.storage[i]['entityName'] == entityName)
-                        collection.push(this.storage[ i ]);
+                        collection.push(this.storage[i]);
                 }
             }
         }
@@ -111,6 +114,8 @@ class service {
     /**
      * svcPut
      * 
+     * totaly rewite existing data
+     * 
      * @param {function} callback
      * @param {array} params
      * @returns {nm$_rest.service}
@@ -119,14 +124,8 @@ class service {
         let id = (params.id || null);
         callback = (callback || noop);
         let collection = [];
-        if (id) {
-            collection = this.storage[ id ];
-        } else {
-            for (var i = 1; i <= this.pK; i++) {
-                if (this.storage[ i ]) {
-                    collection.push(this.storage[ i ]);
-                }
-            }
+        if (id && this.storage[id]) {
+            collection = this.hydrate(this.storage[id], params, false);
         }
         callback(collection);
         return(this);
@@ -134,6 +133,8 @@ class service {
     
     /**
      * svcPatch
+     * 
+     * update existing data
      * 
      * @param {function} callback
      * @param {array} params
@@ -143,14 +144,8 @@ class service {
         let id = (params.id || null);
         callback = (callback || noop);
         let collection = [];
-        if (id) {
-            collection = this.storage[ id ];
-        } else {
-            for (var i = 1; i <= this.pK; i++) {
-                if (this.storage[ i ]) {
-                    collection.push(this.storage[ i ]);
-                }
-            }
+        if (id && this.storage[id]) {
+            collection = this.hydrate(this.storage[id], params, true);
         }
         callback(collection);
         return(this);
