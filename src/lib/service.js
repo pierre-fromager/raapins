@@ -24,6 +24,27 @@ class service {
     noop(){};
     
     /**
+     * hydrate
+     * 
+     * @param {type} object
+     * @param {type} data
+     * @returns {Object}
+     */
+    hydrate(object, params) {
+        object['data'] = {};
+        let iR = /^d+$/;
+        let fR = /^[+-]?\d+(\.\d+)?$/;
+        var k = Object.keys(params.payload);
+        for(var i=0, len = k.length; i<len; i++){
+            var v = params.payload[k[i]];
+            v = (iR.test(v)) ? parseInt(v) : v;
+            v = (fR.test(v)) ? parseFloat(v) : v;
+            object['data'][k[i]] = v;
+        }
+        return object;
+    }
+    
+    /**
      * svcPost
      * 
      * @param {function} callback
@@ -36,7 +57,9 @@ class service {
             id: ++this.pK,
             entityName: params.entityName
         };
-        this.storage[ entity.id ] = entity;
+        this.storage[ entity.id ] = (params) 
+            ? this.hydrate(entity, params) 
+            : entity;
         callback(entity);
         return(this);
     }
