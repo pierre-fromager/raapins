@@ -29,7 +29,7 @@ const color = {
         italic : 3,
         underline : 4,
         slowblink : 5,
-        rapidblick : 6,
+        rapidblink : 6,
         negative : 7,
         conceal : 8,
         crossedout : 9
