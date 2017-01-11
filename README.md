@@ -16,6 +16,7 @@ On end it registers (data, errors) events listener trough controller.
 Controller on data, validates verb to service method and register callback with params.  
 Controller execute service callback then fires error or data event.  
 Server on event returns response with code status and cors headers.  
+
 ##Perf
 Its response is around 25ms.  
 
@@ -38,7 +39,8 @@ http://host/{entity}/{id}
 * **Get** return either an item or a collection entity.
 * **Post** add an item entity.
 * **Delete** remove an item.
-* **Put** update an item.
+* **Put** replace item content.
+* **Patch** update an item.
 
 ## Todo
 
