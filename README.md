@@ -8,6 +8,7 @@ No external dependencies required.
 * server
 * controller
 * service
+* serviceManager
 
 ## Workflow
 
