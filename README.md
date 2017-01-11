@@ -46,10 +46,6 @@ http://host/{entity}/{id}
 * Router
 * Entity
 
-#### Modify
-
-* Service methods POST hydrator
-
 #### Extension
 
 * Model
