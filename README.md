@@ -1,5 +1,5 @@
 # Raapins
-
+![Rapid as rabbit](http://static.pier-infor.fr/img/raapins/logo.jpg)  
 Raapins is a deadly simple restful api async server using memory as storage.  
 No external dependencies required.
 
