@@ -30,7 +30,10 @@ class service extends serviceManager {
         callback = (callback || this.noop);
         let collection = null;
         if (id) {
-            collection = this.storage[id];
+            //collection = this.storage[id];
+            collection = this.setFilter(function( obj ) {
+                return (obj.id == id);
+            }).find();
         } else {
             collection = [];
             for (var i = 1; i <= this.pK; i++) {

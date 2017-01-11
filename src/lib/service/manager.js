@@ -13,8 +13,10 @@ class serviceManager {
      * @returns {nm$_rest.service}
      */
     constructor(storage, pK) {
-        this.storage = (storage) ? storage : {};
+        this.storage = (storage) ? storage : [];
         this.pK = (pK) ? pK : 0;
+        this.default_filter = function (r) {return true;};
+        this.filter = this.default_filter;
     }
     
     /**
@@ -46,7 +48,31 @@ class serviceManager {
         return object;
     }
     
+    /**
+     * find
+     * 
+     * @param {Object} where
+     * @returns {Array}
+     */
+    find(){
+        let results = [];
+        results = this.storage.filter(this.filter);
+        results = (results.length > 0) ? results : null;
+        return results;
+    };
     
+    /**
+     * setFilter
+     * 
+     * @param {Function} filterCallback
+     * @returns {Orm}
+     */
+    setFilter(filterCallback) {
+        this.filter = (filterCallback) 
+            ? filterCallback 
+            : this.default_filter;
+        return this;
+    }
 }
 
 module.exports = serviceManager;
