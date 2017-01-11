@@ -12,7 +12,7 @@ No external dependencies required.
 ## Workflow
 
 Server on data request collects datas.  
-On end it registers (data, erros) events listener trough controller.  
+On end it registers (data, errors) events listener trough controller.  
 Controller on data, validates verb to service method and register callback with params.  
 Controller execute service callback then fires error or data event.  
 Server on event returns response with code status and cors headers.  
