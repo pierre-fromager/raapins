@@ -10,6 +10,8 @@ const controller = new ctrlEmitter();
 const qs = require('querystring');
 const cors = require('./cors.js');
 
+const hook = {};
+
 /**
  * methods
  * 
@@ -26,13 +28,37 @@ controller.methods = () => {
  * @returns {String}
  */
 controller.action = (request) => {
+    let action = null;
     capitalizeFirstLetter = (string) => {
         return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
     }
-    return ((controller.methods().indexOf(request.method.toLowerCase()) !== -1)) 
-        ? 'svc' + capitalizeFirstLetter(request.method) 
-        : null;
+    if (controller.hook) {
+        action = controller.hook.action;
+        controller.hook = null;
+        return action;
+    } else {
+        action = ((controller.methods().indexOf(request.method.toLowerCase()) !== -1)) 
+            ? 'svc' + capitalizeFirstLetter(request.method) 
+            : null;
+    }
+    return action;
 }
+
+/**
+ * getService
+ * s
+ * @param {string} service
+ * @returns {undefined}
+ */
+controller.getService = (service) => {}
+
+/**
+ * setHook
+ * 
+ * @param {object} hook
+ * @returns {undefined}
+ */
+controller.setHook = (hook) => { controller.hook = hook;}
 
 /**
  * listen
@@ -59,6 +85,17 @@ controller.listen = (controllerInstance, router, res, reqRawData) => {
 }
 
 /**
+ * sendSignal
+ * 
+ * @param {string} signal
+ * @param {string} response
+ * @returns {undefined}
+ */
+controller.sendSignal = (signal, response) => {
+    controller.emit(signal, response);
+}
+
+/**
  * handle
  * 
  * @param {router} router
@@ -67,32 +104,31 @@ controller.listen = (controllerInstance, router, res, reqRawData) => {
  */
 controller.handle = (router, payload ) => {
     let action = controller.action(router.req);
-    if(action && (router.match.length > 0)) {
+    console.log('action');
+    console.log(action);
+    if(action && (router.match && router.match.length > 0)) {
         let apiArguments = [function (apiResponse) {
             if (apiResponse) {
-                controller.emit('data', apiResponse);
+                controller.sendSignal('data', apiResponse);
             } else {
-                controller.emit('error', '404');
+                controller.sendSignal('error', '404');
             }
         }];
+        let entityName = router.match[0];
+        let id = (router.match[1]) 
+            ? (!isNaN(parseInt(router.match[1])) ? router.match[1] : null) 
+            : null;
         let params = {
-            'entityName' : router.match[0]
-            , 'id' : (router.match[1]) 
-                ? (!isNaN(parseInt(router.match[1])) ? router.match[1] : null) 
-                : null
+            'entityName' : entityName
+            , 'id' : id
             , 'payload' : payload
         };
         apiArguments.push(params);
         service[action].apply(service, apiArguments);
         return;
     } else {
-        controller.emit('error', '404');
+        controller.sendSignal('error', '404');
     }
-    controller.emit('error', '500');
 };
-
-controller.run = (service, action, args) => {
-    service[action].apply(service, args);
-}
 
 module.exports = controller;

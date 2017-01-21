@@ -14,23 +14,43 @@ controller.setMaxListeners(config.process.maxlisteners);
 profiler.add('starting');
 
 router.config({root : '/'});
+
+let statGlob = /^stat/;
+let statEnt = /^stat\/([a-zA-Z0-9_]{1,10})/;
 let apiRegexp = /^api\/v1\/([a-zA-Z0-9_]{1,10})/;
 let apiRegexpId = /^api\/v1\/([a-zA-Z0-9_]{1,10})\/(\d*)/;
-router.add('GET', apiRegexpId, function () {
+
+router
+.add('GET', statEnt, function () {
+    controller.setHook(
+        {
+            service : 'service',
+            action: 'svcCount',
+            params: arguments
+        }
+    );
+    console.log('statEnt', arguments);
+})
+.add('GET', statGlob, function () {
+    controller.setHook({action:'svcCount'});
+    console.log('statGlob', arguments);
+})
+.add('GET', apiRegexpId, function () {
     console.log('API v1 GET with id', arguments);
-    /*
-    return {
-        args : arguments
-    }*/
-}).add('GET', apiRegexp, function () {
+})
+.add('GET', apiRegexp, function () {
     console.log('API v1 GET', arguments);
-}).add('POST', apiRegexp, function () {
+})
+.add('POST', apiRegexp, function () {
     console.log('API v1 POST', arguments);
-}).add('PUT', apiRegexpId, function () {
+})
+.add('PUT', apiRegexpId, function () {
     console.log('API v1 PUT with id', arguments);
-}).add('PATCH', apiRegexpId, function () {
+})
+.add('PATCH', apiRegexpId, function () {
     console.log('API v1 PATCH with id', arguments);
-}).add('DELETE', apiRegexpId, function () {
+})
+.add('DELETE', apiRegexpId, function () {
     console.log('API v1 DELETE with id', arguments);
 });
 

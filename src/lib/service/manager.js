@@ -1,5 +1,5 @@
 /**
- * service
+ * serviceManager
  * 
  */
 class serviceManager {
@@ -51,10 +51,21 @@ class serviceManager {
     /**
      * find
      * 
-     * @param {Object} where
      * @returns {Array}
      */
     find(){
+        let results = [];
+        results = this.storage.filter(this.filter);
+        results = (results.length > 0) ? results : null;
+        return results;
+    };
+    
+    /**
+     * count
+     * 
+     * @returns {Array}
+     */
+    count(){
         let results = [];
         results = this.storage.filter(this.filter);
         results = (results.length > 0) ? results : null;
