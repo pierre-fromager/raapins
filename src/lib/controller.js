@@ -104,8 +104,6 @@ controller.sendSignal = (signal, response) => {
  */
 controller.handle = (router, payload ) => {
     let action = controller.action(router.req);
-    console.log('action');
-    console.log(action);
     if(action && (router.match && router.match.length > 0)) {
         let apiArguments = [function (apiResponse) {
             if (apiResponse) {
