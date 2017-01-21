@@ -14,8 +14,8 @@ controller.setMaxListeners(config.process.maxlisteners);
 profiler.add('starting');
 
 router.config({root : '/'});
-let apiRegexp = /^api\/v1\/([a-zA-Z0-9_]*)/;
-let apiRegexpId = /^api\/v1\/([a-zA-Z0-9_]*)\/(\d*)/;
+let apiRegexp = /^api\/v1\/([a-zA-Z0-9_]{1,10})/;
+let apiRegexpId = /^api\/v1\/([a-zA-Z0-9_]{1,10})\/(\d*)/;
 router.add('GET', apiRegexpId, function () {
     console.log('API v1 GET with id', arguments);
     /*
