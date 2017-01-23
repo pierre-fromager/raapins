@@ -42,7 +42,7 @@ http://host/{entity}/{id}
 
 ## Verbs
 
-* **Get** return either an item or a collection entity.
+* **Get** return either an item or a collection entity in no hook case.
 * **Post** add an item entity.
 * **Delete** remove an item.
 * **Put** replace item content.
@@ -53,12 +53,10 @@ http://host/{entity}/{id}
 #### Create
 
 * App
-* Router
-* Entity
+* Model
 
 #### Extension
 
-* Model
 * Storage adapter (Sql, Redis)
 
 ## Tests
