@@ -6,13 +6,18 @@ No external dependencies required.
 ## Arch
 
 * server
+* router
 * controller
-* service
+* service <- (serviceStat)
+* serviceStat <- (serviceManager)
 * serviceManager
+
+ps : (I) means inherit, (B) is base class.
 
 ## Workflow
 
-Server on data request collects datas.  
+Server on data request queries router.
+On router routes matches, controller queries matching service/action.
 On end it registers (data, errors) events listener trough controller.  
 Controller on data, validates verb to service method and register callback with params.  
 Controller execute service callback then fires error or data event.  
@@ -79,12 +84,12 @@ node client.js
 ```
 #### Generate Doc
 
-Doc is genrated using jsdoc, do before :
+Doc generator is jsdoc, before :
 ```bash
 npm i jsdoc -g
 chmod +x ./fixture/gendoc.sh
 ```
-to generate doc using jsdoc, from project root use :
+to generate doc using jsdoc, @project root use :
 ```bash
 ./fixture/gendoc.sh
 ```
