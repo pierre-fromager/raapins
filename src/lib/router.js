@@ -20,12 +20,12 @@ const router = {
     clearUri: function (path) {
         return path.toString().replace(/\/$/, this.empty).replace(/^\//, this.empty);
     },
-    add: function (method, re, handler) {
-        if (typeof re == 'function') {
-            handler = re;
-            re = this.empty;
+    add: function (method, reg, handler) {
+        if (typeof reg == 'function') {
+            handler = reg;
+            reg = this.empty;
         }
-        this.routes.push({method: method, re: re, handler: handler});
+        this.routes.push({method: method, reg: reg, handler: handler});
         return this;
     },
     check: function (req) {
@@ -34,8 +34,8 @@ const router = {
         this.method = req.method;
         let methodMatch = false;
         for (var i = 0; i < this.routes.length; i++) {
-            methodMatch = req.method == this.routes[i].method;
-            this.match = this.uri.match(this.routes[i].re);
+            methodMatch = (req.method == this.routes[i].method);
+            this.match = this.uri.match(this.routes[i].reg);
             if (this.match && methodMatch) {
                 this.match.shift();
                 this.routes[i].handler.apply({}, this.match);

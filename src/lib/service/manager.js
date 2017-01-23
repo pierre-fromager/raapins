@@ -68,7 +68,6 @@ class serviceManager {
     count(){
         let results = this.find();
         let counter = (results) ? results.length : null;
-        delete results;
         return counter;
     };
     
