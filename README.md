@@ -16,8 +16,8 @@ ps : (I) means inherit, (B) is base class.
 
 ## Workflow
 
-Server on data request queries router.
-On router routes matches, controller queries matching service/action.
+Server on data request queries router.  
+On router routes matches, controller queries matching service/action.  
 On end it registers (data, errors) events listener trough controller.  
 Controller on data, validates verb to service method and register callback with params.  
 Controller execute service callback then fires error or data event.  
