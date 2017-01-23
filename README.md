@@ -73,8 +73,18 @@ Async let you play runner in async mode (//).
 
 Ensure that postman collection and environnement match your config server @ip and port settings.
 
-#### Client test
-
+#### Client load test
 ```bash
 node client.js
+```
+#### Generate Doc
+
+Doc is genrated using jsdoc, do before :
+```bash
+npm i jsdoc -g
+chmod +x ./fixture/gendoc.sh
+```
+to generate doc using jsdoc, from project root use :
+```bash
+./fixture/gendoc.sh
 ```
