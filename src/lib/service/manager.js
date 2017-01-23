@@ -4,13 +4,12 @@
  */
 class serviceManager {
     
-    
     /**
      * constructor
      * 
-     * @param {type} storage
-     * @param {type} pK
-     * @returns {nm$_rest.service}
+     * @param {Array} storage
+     * @param {Int} pK
+     * @returns {nm$_manager.serviceManager}
      */
     constructor(storage, pK) {
         this.storage = (storage) ? storage : [];
@@ -29,8 +28,9 @@ class serviceManager {
     /**
      * hydrate
      * 
-     * @param {type} object
-     * @param {type} data
+     * @param {Object} object
+     * @param {Array} params
+     * @param {Array} merge
      * @returns {Object}
      */
     hydrate(object, params, merge) {
@@ -76,7 +76,7 @@ class serviceManager {
      * setFilter
      * 
      * @param {Function} filterCallback
-     * @returns {Orm}
+     * @returns {nm$_manager}
      */
     setFilter(filterCallback) {
         this.filter = (filterCallback) 
