@@ -7,6 +7,7 @@ var config = {
         , timeout : 500
         , startmessage : 'Listen'
         , messagestartend : '♬ ♫ ♬'
+        , debug : false
     },
     process : {
         maxlisteners : 1000

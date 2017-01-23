@@ -1,14 +1,14 @@
-const profiler = require('./lib/profiler.js');
-const config = require('./lib/config.js');
-const color = require('./lib/color.js');
-const dater = require('./lib/dater.js');
+const libPath = './lib/';
+const profiler = require(libPath + 'profiler.js');
+const config = require(libPath + 'config.js');
+const color = require(libPath + 'color.js');
+const dater = require(libPath + 'dater.js');
 const http = require('http');
 const server = http.createServer()
     .listen(config.server.port, config.server.address)
     .setTimeout(config.server.timeout);
-const httpDebug = false;
-const router = require('./lib/router.js');
-const controller = require('./lib/controller.js');
+const router = require(libPath + 'router.js');
+const controller = require(libPath + 'controller.js');
 
 controller.setMaxListeners(config.process.maxlisteners);
 profiler.add('starting');
@@ -55,7 +55,7 @@ server.on('request', (req, res) => {
     
     profiler.add('request');
     
-    if (httpDebug) {
+    if (config.server.debug) {
         server.getConnections(function(error, count) {
             let counter = color.get(' >' + count + '< ', color.codes.yellow, color.codes.blue);
             process.stdout.write(
