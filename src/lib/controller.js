@@ -24,7 +24,7 @@ controller.methods = () => {
 /**
  * action
  * 
- * @param {type} request
+ * @param {http.request} request
  * @returns {String}
  */
 controller.action = (request) => {
@@ -34,7 +34,6 @@ controller.action = (request) => {
     }
     if (controller.hook) {
         action = controller.hook.action;
-        controller.hook = null;
         return action;
     } else {
         action = ((controller.methods().indexOf(request.method.toLowerCase()) !== -1)) 
@@ -46,8 +45,8 @@ controller.action = (request) => {
 
 /**
  * getService
- * s
- * @param {string} service
+ * 
+ * @param {String} service
  * @returns {undefined}
  */
 controller.getService = (service) => {}
@@ -55,10 +54,18 @@ controller.getService = (service) => {}
 /**
  * setHook
  * 
- * @param {object} hook
+ * @param {Object} hook
  * @returns {undefined}
  */
-controller.setHook = (hook) => { controller.hook = hook;}
+controller.setHook = (hook) => { controller.hook = hook}
+
+
+/**
+ * isHooked
+ * 
+ * @returns {Boolean}
+ */
+controller.isHooked = () => {return (controller.hook != null)}
 
 /**
  * listen
@@ -112,7 +119,9 @@ controller.handle = (router, payload ) => {
                 controller.sendSignal('error', '404');
             }
         }];
-        let entityName = router.match[0];
+        let entityName = (controller.isHooked()) 
+            ? controller.hook.params.entityName 
+            : router.match[0];
         let id = (router.match[1]) 
             ? (!isNaN(parseInt(router.match[1])) ? router.match[1] : null) 
             : null;
@@ -122,7 +131,8 @@ controller.handle = (router, payload ) => {
             , 'payload' : payload
         };
         apiArguments.push(params);
-        service[action].apply(service, apiArguments);
+        let scres = service[action].apply(service, apiArguments);
+        controller.setHook(null);
         return;
     } else {
         controller.sendSignal('error', '404');

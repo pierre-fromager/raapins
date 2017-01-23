@@ -66,10 +66,10 @@ class serviceManager {
      * @returns {Array}
      */
     count(){
-        let results = [];
-        results = this.storage.filter(this.filter);
-        results = (results.length > 0) ? results : null;
-        return results;
+        let results = this.find();
+        let counter = (results) ? results.length : null;
+        delete results;
+        return counter;
     };
     
     /**
