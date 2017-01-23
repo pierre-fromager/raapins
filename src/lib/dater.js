@@ -1,6 +1,8 @@
 /**
  * Dater
  * 
+ * provides accurate timestamp in ms
+ * 
  */
 const dater = {
     ds : '-',

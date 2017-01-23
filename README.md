@@ -18,8 +18,8 @@ Controller on data, validates verb to service method and register callback with 
 Controller execute service callback then fires error or data event.  
 Server on event returns response with code status and cors headers.  
 
-##Perf
-Its response is around 25ms.  
+## Perf
+response time average is around 30ms.  
 
 ## Start
 
