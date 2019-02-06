@@ -3,7 +3,7 @@ var config = {
     dirname : __dirname,
     server : {
         port : 8080
-        , address : '192.168.1.2'
+        , address : 'localhost'
         , timeout : 500
         , startmessage : 'Listen'
         , messagestartend : '♬ ♫ ♬'

@@ -1,14 +1,31 @@
 {
-  "name": "Raapins",
-  "version": "1.0.0",
-  "keywords": [
-    "restful",
-    "async",
-    "api",
-    "node",
-    "server"
-  ],
-  "author": "pierrefromager",
-  "contributors": [],
-  "dependencies": {}
+    "name": "Raapins",
+    "author": "Pierre Fromager",
+    "version": "1.0.0",
+    "licence": "GNU GPLv3",
+    "repository": "git@github.com:pierre-fromager/raapins.git",
+    "contributors": [
+        "Pierre Fromager"
+    ],
+    "dependencies": {},
+    "devDependencies": {
+        "jsdoc": "^3.5.5",
+        "eslint": "^5.13.0",
+        "eslint-config-airbnb": "^17.1.0",
+        "eslint-plugin-import": "^2.16.0",
+        "eslint-plugin-jsx-a11y": "^6.2.0",
+        "eslint-plugin-react": "^7.12.4"
+    },
+    "keywords": [
+        "restful",
+        "async",
+        "api",
+        "node",
+        "server"
+    ],
+    "scripts": {
+        "doc": "jsdoc -P ./package.json -R ./README.md -r -d ./doc --debug ./src",
+        "lint": "node_modules/.bin/eslint --fix src/*.js",
+        "start": "nodejs src/server.js"
+    }
 }
