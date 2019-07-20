@@ -67,7 +67,7 @@ http://host/{entity}/{id}
 
 In src/tests you can play with client.js.  
 Some required dependencies should be satisfied, mainly async and newman; use npm i.  
-This simulates by default 100// requests.
+This simulates by default 90// requests.
 
 #### Features
 
@@ -80,7 +80,7 @@ Ensure that postman collection and environnement match your config server @ip an
 
 #### Client load test
 ```bash
-node client.js
+npm run test
 ```
 #### Generate Doc
 
