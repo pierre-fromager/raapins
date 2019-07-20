@@ -1,0 +1,216 @@
+{
+	"info": {
+		"_postman_id": "dda2c46d-ee6c-42bf-a669-b4e6190dd981",
+		"name": "NodeMyMvc",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Girl",
+			"item": [
+				{
+					"name": "Add Item",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "mortage",
+									"value": "0.10",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "2016-12-30",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://{{node_host}}:{{node_port}}/piou",
+							"protocol": "http",
+							"host": [
+								"{{node_host}}"
+							],
+							"port": "{{node_port}}",
+							"path": [
+								"piou"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Item",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{node_host}}:{{node_port}}/piou/2",
+							"protocol": "http",
+							"host": [
+								"{{node_host}}"
+							],
+							"port": "{{node_port}}",
+							"path": [
+								"piou",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{node_host}}:{{node_port}}/piou",
+							"protocol": "http",
+							"host": [
+								"{{node_host}}"
+							],
+							"port": "{{node_port}}",
+							"path": [
+								"piou"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Item",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://{{node_host}}:{{node_port}}/piou/1",
+							"protocol": "http",
+							"host": [
+								"{{node_host}}"
+							],
+							"port": "{{node_port}}",
+							"path": [
+								"piou",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Item Fully",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "testPut",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "20",
+									"type": "text"
+								},
+								{
+									"key": "mortage",
+									"value": "0.15",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "2017-12-30",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://{{node_host}}:{{node_port}}/piou/1",
+							"protocol": "http",
+							"host": [
+								"{{node_host}}"
+							],
+							"port": "{{node_port}}",
+							"path": [
+								"piou",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Item Partialy",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "price",
+									"value": "20",
+									"type": "text"
+								},
+								{
+									"key": "mortage",
+									"value": "0.10101010",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://{{node_host}}:{{node_port}}/piou/2",
+							"protocol": "http",
+							"host": [
+								"{{node_host}}"
+							],
+							"port": "{{node_port}}",
+							"path": [
+								"piou",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

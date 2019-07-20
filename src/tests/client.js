@@ -3,7 +3,7 @@ var path = require('path'),
     newman = require('newman'),
     fixturesPath = '/../../fixtures/',
     parametersForTestRun = {
-        collection: path.join(__dirname + fixturesPath, 'postman_collection.json'),
+        collection: path.join(__dirname + fixturesPath, 'postman_collection_v2.json'),
         environment: path.join(__dirname + fixturesPath, 'postman_environment.json'),
     },
     paralleCollectionStack = [],

@@ -9,12 +9,14 @@
     ],
     "dependencies": {},
     "devDependencies": {
-        "jsdoc": "^3.5.5",
+        "async": "^3.1.0",
         "eslint": "^5.13.0",
         "eslint-config-airbnb": "^17.1.0",
         "eslint-plugin-import": "^2.16.0",
         "eslint-plugin-jsx-a11y": "^6.2.0",
-        "eslint-plugin-react": "^7.12.4"
+        "eslint-plugin-react": "^7.12.4",
+        "jsdoc": "^3.6.3",
+        "newman": "^4.5.1"
     },
     "keywords": [
         "restful",
@@ -26,6 +28,7 @@
     "scripts": {
         "doc": "jsdoc -P ./package.json -R ./README.md -r -d ./doc --debug ./src",
         "lint": "node_modules/.bin/eslint --fix src/*.js",
-        "start": "nodejs src/server.js"
+        "start": "nodejs src/server.js",
+        "test": "node ./src/tests/client.js"
     }
 }
