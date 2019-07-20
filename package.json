@@ -1,7 +1,7 @@
 {
-    "name": "Raapins",
+    "name": "raapins",
     "author": "Pierre Fromager",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "licence": "GNU GPLv3",
     "repository": "git@github.com:pierre-fromager/raapins.git",
     "contributors": [
@@ -10,11 +10,11 @@
     "dependencies": {},
     "devDependencies": {
         "async": "^3.1.0",
-        "eslint": "^5.13.0",
-        "eslint-config-airbnb": "^17.1.0",
-        "eslint-plugin-import": "^2.16.0",
-        "eslint-plugin-jsx-a11y": "^6.2.0",
-        "eslint-plugin-react": "^7.12.4",
+        "eslint": "^5.16.0",
+        "eslint-config-airbnb": "^17.1.1",
+        "eslint-plugin-import": "^2.18.2",
+        "eslint-plugin-jsx-a11y": "^6.2.3",
+        "eslint-plugin-react": "^7.14.2",
         "jsdoc": "^3.6.3",
         "newman": "^4.5.1"
     },
