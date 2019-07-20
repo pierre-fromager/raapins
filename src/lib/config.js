@@ -3,11 +3,11 @@ var config = {
     dirname : __dirname,
     server : {
         port : 8080
-        , address : 'localhost'
+        , address : '127.0.0.1'
         , timeout : 500
         , startmessage : 'Listen'
         , messagestartend : '♬ ♫ ♬'
-        , debug : false
+        , debug : true
     },
     process : {
         maxlisteners : 1000

@@ -44,14 +44,16 @@
 							]
 						},
 						"url": {
-							"raw": "http://{{node_host}}:{{node_port}}/piou",
+							"raw": "http://{{node_host}}:{{node_port}}/api/v1/girl",
 							"protocol": "http",
 							"host": [
 								"{{node_host}}"
 							],
 							"port": "{{node_port}}",
 							"path": [
-								"piou"
+								"api",
+								"v1",
+								"girl"
 							]
 						}
 					},
@@ -63,15 +65,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{node_host}}:{{node_port}}/piou/2",
+							"raw": "http://{{node_host}}:{{node_port}}/api/v1/toto/1",
 							"protocol": "http",
 							"host": [
 								"{{node_host}}"
 							],
 							"port": "{{node_port}}",
 							"path": [
-								"piou",
-								"2"
+								"api",
+								"v1",
+								"toto",
+								"1"
 							]
 						}
 					},
@@ -83,14 +87,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{node_host}}:{{node_port}}/piou",
+							"raw": "http://{{node_host}}:{{node_port}}/api/v1/girl",
 							"protocol": "http",
 							"host": [
 								"{{node_host}}"
 							],
 							"port": "{{node_port}}",
 							"path": [
-								"piou"
+								"api",
+								"v1",
+								"girl"
 							]
 						}
 					},
@@ -106,14 +112,16 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "http://{{node_host}}:{{node_port}}/piou/1",
+							"raw": "http://{{node_host}}:{{node_port}}/api/v1/girl/1",
 							"protocol": "http",
 							"host": [
 								"{{node_host}}"
 							],
 							"port": "{{node_port}}",
 							"path": [
-								"piou",
+								"api",
+								"v1",
+								"girl",
 								"1"
 							]
 						}
@@ -156,15 +164,17 @@
 							]
 						},
 						"url": {
-							"raw": "http://{{node_host}}:{{node_port}}/piou/1",
+							"raw": "http://{{node_host}}:{{node_port}}/api/v1/toto/2",
 							"protocol": "http",
 							"host": [
 								"{{node_host}}"
 							],
 							"port": "{{node_port}}",
 							"path": [
-								"piou",
-								"1"
+								"api",
+								"v1",
+								"toto",
+								"2"
 							]
 						}
 					},
@@ -196,14 +206,16 @@
 							]
 						},
 						"url": {
-							"raw": "http://{{node_host}}:{{node_port}}/piou/2",
+							"raw": "http://{{node_host}}:{{node_port}}/api/v1/girl/2",
 							"protocol": "http",
 							"host": [
 								"{{node_host}}"
 							],
 							"port": "{{node_port}}",
 							"path": [
-								"piou",
+								"api",
+								"v1",
+								"girl",
 								"2"
 							]
 						}
