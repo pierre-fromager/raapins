@@ -4,8 +4,8 @@ Raapins is a deadly simple restful api async server using memory as storage.
 
 ## Dependencies
 
-* Async
-* Newman
+* Newman (replay Postman's collection in runner mode)
+* Async (play runner in async concurent mode)
 
 ## Arch
 
@@ -51,36 +51,9 @@ http://{host}/stat/{entity}
 * **Put** replace item content.
 * **Patch** update an item.
 
-## Todo
+## Load simulation
 
-#### Implementation
-
-* App
-* Model
-* Mocha test suite
-
-#### Extension
-
-* Storage adapter (Sql, Redis)
-
-## Tests
-
-#### Purpose
-
-In src/tests you can play with client.js.  
-Some required dependencies should be satisfied, mainly async and newman; use npm i.  
-This simulates by default 90// requests.
-
-#### Features
-
-Newman let you replay Postman's collection in runner mode.  
-Async let you play runner in async mode (//).  
-
-#### Settings
-
-Ensure that postman collection and environnement match your config server @ip and port settings.
-
-#### Client load test
+This simulates 90 concurent requests.
 
 ```bash
 npm run client
