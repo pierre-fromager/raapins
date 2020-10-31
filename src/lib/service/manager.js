@@ -3,7 +3,7 @@
  * 
  */
 class serviceManager {
-    
+
     /**
      * constructor
      * 
@@ -14,17 +14,16 @@ class serviceManager {
     constructor(storage, pK) {
         this.storage = (storage) ? storage : [];
         this.pK = (pK) ? pK : 0;
-        this.default_filter = function (r) {return true;};
+        this.default_filter = (r) => true;
         this.filter = this.default_filter;
     }
-    
+
     /**
      * noop
      * 
-     * @returns {undefined}
      */
-    noop(){};
-    
+    noop = () => { }
+
     /**
      * hydrate
      * 
@@ -33,13 +32,13 @@ class serviceManager {
      * @param {Array} merge
      * @returns {Object}
      */
-    hydrate(object, params, merge) {
-        let dK = 'data';
+    hydrate = (object, params, merge) => {
+        const dK = 'data';
         object[dK] = (merge) ? (object[dK] || {}) : {};
-        let iR = /^d+$/;
-        let fR = /^[+-]?\d+(\.\d+)?$/;
-        var k = Object.keys(params.payload);
-        for(var i=0, len = k.length; i<len; i++){
+        const iR = /^d+$/;
+        const fR = /^[+-]?\d+(\.\d+)?$/;
+        const k = Object.keys(params.payload);
+        for (var i = 0, len = k.length; i < len; i++) {
             var v = params.payload[k[i]];
             v = (iR.test(v)) ? parseInt(v) : v;
             v = (fR.test(v)) ? parseFloat(v) : v;
@@ -47,39 +46,39 @@ class serviceManager {
         }
         return object;
     }
-    
+
     /**
      * find
      * 
      * @returns {Array}
      */
-    find(){
+    find = () => {
         let results = [];
         results = this.storage.filter(this.filter);
         results = (results.length > 0) ? results : null;
         return results;
     };
-    
+
     /**
      * count
      * 
      * @returns {Array}
      */
-    count(){
+    count = () => {
         let results = this.find();
         let counter = (results) ? results.length : null;
         return counter;
     };
-    
+
     /**
      * setFilter
      * 
      * @param {Function} filterCallback
      * @returns {nm$_manager}
      */
-    setFilter(filterCallback) {
-        this.filter = (filterCallback) 
-            ? filterCallback 
+    setFilter = (filterCallback) => {
+        this.filter = (filterCallback)
+            ? filterCallback
             : this.default_filter;
         return this;
     }

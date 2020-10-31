@@ -1,13 +1,13 @@
-const serviceManager = require('./service/stat');
+const serviceStat = require('./stat');
 
 /**
- * service
+ * serviceRest
  * 
- * is a rest service dealing rest requests without hook, returns 404 if no data.
+ * rest service dealing rest requests without hook, returns 404 if no data.
  * 
  */
-class service extends serviceManager {
-    
+class serviceRest extends serviceStat {
+
     /**
      * constructor
      * 
@@ -30,29 +30,21 @@ class service extends serviceManager {
      * @param {array} params
      * @returns {nm$_rest.service}
      */
-    svcGet(callback, params) {
-        let id = (params.id || null);
-        let entityName = (params.entityName || null);
+    svcGet = (callback, params) => {
+        const id = (params.id || null);
+        const entityName = (params.entityName || null);
         callback = (callback || this.noop);
-        let collection = null;
+        let collection = [];
         if (id) {
-            collection = this.setFilter(function( obj ) {
-                return (obj.id == id);
-            }).find();
+            collection = this.setFilter(obj => obj.id == id).find();
         } else {
-            collection = [];
-            for (var i = 1; i <= this.pK; i++) {
-                if (this.storage[ i ]) {
-                    if (this.storage[i]['entityName'] == entityName)
-                        collection.push(this.storage[i]);
-                }
-            }
+            collection = this.setFilter(obj => obj.entityName == entityName).find();
             collection = (collection.length > 0) ? collection : null;
         }
         callback(collection);
-        return(this);
+        return (this);
     };
-        
+
     /**
      * svcPost
      * 
@@ -62,19 +54,19 @@ class service extends serviceManager {
      * @param {array} params
      * @returns {nm$_rest.service}
      */
-    svcPost(callback, params) {
+    svcPost = (callback, params) => {
         callback = (callback || this.noop);
-        let entity = {
+        const entity = {
             id: ++this.pK,
             entityName: params.entityName
         };
-        this.storage[ entity.id ] = (params) 
-            ? this.hydrate(entity, params, true) 
+        this.storage[entity.id] = (params)
+            ? this.hydrate(entity, params, true)
             : entity;
         callback(entity);
-        return(this);
+        return (this);
     }
-    
+
     /**
      * svcDelete
      * 
@@ -84,17 +76,17 @@ class service extends serviceManager {
      * @param {array} params
      * @returns {nm$_rest.service}
      */
-    svcDelete(callback, params) {
-        let id = (params.id || null);
+    svcDelete = (callback, params) => {
+        const id = (params.id || null);
         callback = (callback || this.noop);
         let svcity = (this.storage[id] || null);
         if (id && this.storage[id]) {
             delete this.storage[id];
         }
         callback(svcity);
-        return(this);
+        return (this);
     }
-    
+
     /**
      * svcPut
      * 
@@ -104,17 +96,17 @@ class service extends serviceManager {
      * @param {array} params
      * @returns {nm$_rest.service}
      */
-    svcPut(callback, params) {
-        let id = (params.id || null);
+    svcPut = (callback, params) => {
+        const id = (params.id || null);
         callback = (callback || this.noop);
         let collection = null;
         if (id && this.storage[id]) {
             collection = this.hydrate(this.storage[id], params, false);
         }
         callback(collection);
-        return(this);
+        return (this);
     };
-    
+
     /**
      * svcPatch
      * 
@@ -124,16 +116,16 @@ class service extends serviceManager {
      * @param {array} params
      * @returns {nm$_rest.service}
      */
-    svcPatch(callback, params) {
-        let id = (params.id || null);
+    svcPatch = (callback, params) => {
+        const id = (params.id || null);
         callback = (callback || this.noop);
         let collection = null;
         if (id && this.storage[id]) {
             collection = this.hydrate(this.storage[id], params, true);
         }
         callback(collection);
-        return(this);
+        return (this);
     };
 }
 
-module.exports = service;
+module.exports = serviceRest;

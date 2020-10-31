@@ -1,4 +1,4 @@
-/* eslint no-console: "off" */
+
 const http = require('http');
 const profiler = require('./lib/profiler');
 const config = require('./lib/config');
@@ -16,10 +16,13 @@ profiler.add('starting');
 
 router.config({ root: '/' });
 
+const homeRegex = /^home$/;
 const statGlob = /^(stat)$/;
 const statEnt = /^(stat)\/([a-zA-Z0-9_]{1,10})/;
 const apiRegexp = /^api\/v1\/([a-zA-Z0-9_]{1,10})/;
 const apiRegexpId = /^api\/v1\/([a-zA-Z0-9_]{1,10})\/(\d*)/;
+
+const noopCb = () => {};
 
 router.add('GET', statEnt, (...args) => {
   controller.setHook(
@@ -45,15 +48,21 @@ router.add('GET', statEnt, (...args) => {
       },
     );
   })
-  .add('GET', apiRegexpId, () => {})
-  .add('GET', apiRegexp, () => {})
-  .add('POST', apiRegexp, () => {})
-  .add('PUT', apiRegexpId, () => {})
-  .add('PATCH', apiRegexpId, () => {})
-  .add('DELETE', apiRegexpId, () => {});
+  .add('GET', apiRegexpId, noopCb)
+  .add('GET', apiRegexp, noopCb)
+  .add('POST', apiRegexp, noopCb)
+  .add('PUT', apiRegexpId, noopCb)
+  .add('PATCH', apiRegexpId, noopCb)
+  .add('DELETE', apiRegexpId, noopCb)
+  .add('GET', homeRegex, () => {
+    console.log('home sweet home');
+  });
 
 server.on('request', (req, res) => {
   profiler.add('request');
+  if (req.url === '/') {
+    req.url = '/home';
+  }
 
   if (config.server.debug) {
     server.getConnections((error, count) => {

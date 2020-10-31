@@ -3,7 +3,7 @@
  * 
  * is a front rest controller
  */
-const restService = require( './service.js');
+const restService = require('./service/rest.js');
 const ctrlEmitter = require('events').EventEmitter;
 
 const service = new restService();
@@ -14,14 +14,39 @@ const cors = require('./cors.js');
 
 const hook = {};
 
+const ctrlEnum = {
+    error: 'error',
+    data: 'data',
+    action: {
+        prefix: 'svc'
+    },
+    http: {
+        request: {
+            verbs: ['get', 'put', 'patch', 'delete', 'post']
+        },
+        response: {
+            code: {
+                error: '404'
+            }
+        }
+    },
+    handler: {
+        api: {
+            args: {
+                entityName: 'entityName',
+                id: 'id',
+                payload: 'payload'
+            }
+        }
+    }
+}
+
 /**
  * methods
  * 
  * @returns {Array}
  */
-controller.methods = () => {
-    return ['get', 'put', 'patch', 'delete', 'post'];
-}
+controller.methods = () => ctrlEnum.http.request.verbs
 
 /**
  * action
@@ -31,15 +56,15 @@ controller.methods = () => {
  */
 controller.action = (request) => {
     let action = null;
-    capitalizeFirstLetter = (string) => {
-        return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
-    }
+    capitalizeFirstLetter = (string) =>
+        string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+
     if (controller.hook) {
         action = controller.hook.action;
         return action;
     } else {
-        action = ((controller.methods().indexOf(request.method.toLowerCase()) !== -1)) 
-            ? 'svc' + capitalizeFirstLetter(request.method) 
+        action = ((controller.methods().indexOf(request.method.toLowerCase()) !== -1))
+            ? ctrlEnum.action.prefix + capitalizeFirstLetter(request.method)
             : null;
     }
     return action;
@@ -51,7 +76,7 @@ controller.action = (request) => {
  * @param {String} service
  * @returns {undefined}
  */
-controller.getService = (service) => {}
+controller.getService = (service) => { }
 
 /**
  * setHook
@@ -59,7 +84,7 @@ controller.getService = (service) => {}
  * @param {Object} hook
  * @returns {undefined}
  */
-controller.setHook = (hook) => { controller.hook = hook}
+controller.setHook = (hook) => controller.hook = hook
 
 
 /**
@@ -67,7 +92,7 @@ controller.setHook = (hook) => { controller.hook = hook}
  * 
  * @returns {Boolean}
  */
-controller.isHooked = () => {return (controller.hook != null)}
+controller.isHooked = () => controller.hook != null
 
 /**
  * listen
@@ -79,17 +104,17 @@ controller.isHooked = () => {return (controller.hook != null)}
  * @returns {undefined}
  */
 controller.listen = (controllerInstance, router, res, reqRawData) => {
-    
-    controllerInstance.once('data', (data) => {
+
+    controllerInstance.once(ctrlEnum.data, (data) => {
         res.writeHead(200, cors.getHeaders());
         res.end(JSON.stringify(data));
     });
-    
-    controllerInstance.once('error', (errorType) => {
+
+    controllerInstance.once(ctrlEnum.error, (errorType) => {
         res.writeHead(errorType, cors.getHeaders());
         res.end();
     });
-    
+
     controllerInstance.handle(router, qs.parse(reqRawData));
 }
 
@@ -111,33 +136,28 @@ controller.sendSignal = (signal, response) => {
  * @param {array} payload
  * @returns {undefined}
  */
-controller.handle = (router, payload ) => {
-    let action = controller.action(router.req);
-    if(action && (router.match && router.match.length > 0)) {
-        let apiArguments = [function (apiResponse) {
+controller.handle = (router, payload) => {
+    const action = controller.action(router.req);
+    if (action && (router.match && router.match.length > 0)) {
+        let apiArguments = [(apiResponse) => {
             if (apiResponse) {
-                controller.sendSignal('data', apiResponse);
+                controller.sendSignal(ctrlEnum.data, apiResponse);
             } else {
-                controller.sendSignal('error', '404');
+                controller.sendSignal(ctrlEnum.error, ctrlEnum.http.response.code.error);
             }
         }];
-        let entityName = (controller.isHooked()) 
-            ? controller.hook.params.entityName 
+        const entityName = (controller.isHooked())
+            ? controller.hook.params.entityName
             : router.match[0];
-        let id = (router.match[1]) 
-            ? (!isNaN(parseInt(router.match[1])) ? router.match[1] : null) 
+        const id = (router.match[1])
+            ? (!isNaN(parseInt(router.match[1])) ? router.match[1] : null)
             : null;
-        let params = {
-            'entityName' : entityName
-            , 'id' : id
-            , 'payload' : payload
-        };
-        apiArguments.push(params);
-        let scres = service[action].apply(service, apiArguments);
+        apiArguments.push({ entityName, id, payload });
+        service[action].apply(service, apiArguments);
         controller.setHook(null);
         return;
     } else {
-        controller.sendSignal('error', '404');
+        controller.sendSignal(ctrlEnum.error, ctrlEnum.http.response.code.error);
     }
 };
 

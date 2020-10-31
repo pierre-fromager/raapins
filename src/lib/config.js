@@ -1,5 +1,5 @@
 
-var config = {
+const config = {
     dirname : __dirname,
     server : {
         port : 8088
