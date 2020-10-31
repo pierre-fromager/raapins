@@ -2,7 +2,7 @@
 var config = {
     dirname : __dirname,
     server : {
-        port : 8080
+        port : 8088
         , address : '127.0.0.1'
         , timeout : 500
         , startmessage : 'Listen'
@@ -22,4 +22,4 @@ var config = {
     }
 };
 
-module.exports = config;
+module.exports = config
