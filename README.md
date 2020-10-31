@@ -18,12 +18,12 @@ Raapins is a deadly simple restful api async server using memory as storage.
 
 ## Workflow
 
-Server on data request queries router.  
-On router route matches controller action related match.  
-On server request end it registers (data, errors) events listener trough controller.  
-Controller on data, validates verb to service method and register callback with params.  
-Controller execute service callback then fires error or data event.  
-Server on event returns response with code status and cors headers.  
+* Server on data request queries router.  
+* On router route matches controller action related match.  
+* On server request end it registers (data, errors) events listener trough controller.  
+* Controller on data, validates verb to service method and register callback with params.  
+* Controller execute service callback then fires error or data event.  
+* Server on event returns response with code status and cors headers.  
 
 ## Perf
 response time average is around 30ms.  
@@ -34,7 +34,7 @@ response time average is around 30ms.
 npm run server
 ```
 
-## Pathname
+## Endpoints
 
 http://{host}/api/v1/{entity}/{id}
 
@@ -59,7 +59,7 @@ This simulates 90 concurent requests.
 npm run client
 ```
 
-#### Doc
+## Doc
 
 ```bash
 npm run doc
