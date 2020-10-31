@@ -31,7 +31,7 @@ response time average is around 30ms.
 ## Start
 
 ```bash
-npm run start
+npm run server
 ```
 
 ## Pathname
