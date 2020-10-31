@@ -1,18 +1,23 @@
-
 {
- "root": true,
- "env": {
-  "es6": true,
-  "node": true,
-  "browser": false
- },
- "extends": [ "airbnb", "plugin:import/warnings" ],
- "parserOptions": {
-  "ecmaVersion": 2018,
-  "sourceType": "module",
-  "ecmaFeatures": {
-   "allowShortCircuit": true,
-   "allowTernary": true,
-  }
- }
+    "root": true,
+    "env": {
+        "es6": true,
+        "node": true,
+        "browser": false
+    },
+    "extends": [
+        "airbnb",
+        "plugin:import/warnings"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "allowShortCircuit": true,
+            "allowTernary": true
+        }
+    },
+    "rules": {
+        "no-console": "off"
+    }
 }

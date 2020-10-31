@@ -1,7 +1,11 @@
-# Raapins
-![Rapid as rabbit](http://static.pier-infor.fr/img/raapins/logo.jpg)  
+# Raapins - rapid as rabbit
+
 Raapins is a deadly simple restful api async server using memory as storage.  
-No external dependencies required.
+
+## Dependencies
+
+* Async
+* Newman
 
 ## Arch
 
@@ -11,8 +15,6 @@ No external dependencies required.
 * service <- (serviceStat)
 * serviceStat <- (serviceManager)
 * serviceManager
-
-ps : (I) means inherit, (B) is base class.
 
 ## Workflow
 
@@ -29,16 +31,17 @@ response time average is around 30ms.
 ## Start
 
 ```bash
-node server.js
+npm run start
 ```
 
 ## Pathname
 
-http://host/{entity}/{id}
+http://{host}/api/v1/{entity}/{id}
+
+http://{host}/stat/{entity}
 
 * {entity} is mandatory
 * {id} is optional for get, mandatory for other verbs.
-
 
 ## Verbs
 
@@ -53,7 +56,6 @@ http://host/{entity}/{id}
 #### Implementation
 
 * App
-* Routes
 * Model
 * Mocha test suite
 
@@ -80,7 +82,7 @@ Ensure that postman collection and environnement match your config server @ip an
 
 #### Client load test
 ```bash
-npm run test
+npm run client
 ```
 #### Generate Doc
 

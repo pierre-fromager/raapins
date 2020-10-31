@@ -1,18 +1,18 @@
 const router = {
-    separator : '/',
+    separator: '/',
     empty: '',
     routes: [],
     root: this.separator,
     server: null,
     match: false,
     req: null,
-    uri : null,
+    uri: null,
     method: null,
     config: function (options) {
-        this.root = (options && options.root) 
+        this.root = (options && options.root)
             ? this.separator + this.clearUri(options.root) + this.separator
             : this.separator;
-        this.sever = (options && options.server) 
+        this.sever = (options && options.server)
             ? options.server
             : this.sever;
         return this;
@@ -25,7 +25,7 @@ const router = {
             handler = reg;
             reg = this.empty;
         }
-        this.routes.push({method: method, reg: reg, handler: handler});
+        this.routes.push({ method: method, reg: reg, handler: handler });
         return this;
     },
     check: function (req) {
