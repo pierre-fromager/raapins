@@ -1,10 +1,11 @@
 
 import http from 'http';
-import { profiler } from './lib/profiler.js';
-import { config } from './lib/config.js';
-import { color } from './lib/color.js';
-import { dater } from './lib/dater.js';
-import { router } from './lib/router.js';
+import { profiler } from './lib/profile/profiler.js';
+import { config } from './lib/conf/config.js';
+import { color } from './lib/term/color.js';
+import { dater } from './lib/date/dater.js';
+import { router } from './lib/net/router.js';
+import { verbs } from './lib/net/verbs.js';
 import controller from './lib/controller.js';
 
 const server = http.createServer()
@@ -24,7 +25,7 @@ const apiRegexpId = /^api\/v1\/([a-zA-Z0-9_]{1,10})\/(\d*)/;
 
 const noopCb = () => { };
 
-router.add('GET', statEnt, (...args) => {
+router.add(verbs.get, statEnt, (...args) => {
   controller.setHook(
     {
       service: 'service',
@@ -36,7 +37,7 @@ router.add('GET', statEnt, (...args) => {
     },
   );
 })
-  .add('GET', statGlob, () => {
+  .add(verbs.get, statGlob, () => {
     controller.setHook(
       {
         service: 'service',
@@ -48,13 +49,13 @@ router.add('GET', statEnt, (...args) => {
       },
     );
   })
-  .add('GET', apiRegexpId, noopCb)
-  .add('GET', apiRegexp, noopCb)
-  .add('POST', apiRegexp, noopCb)
-  .add('PUT', apiRegexpId, noopCb)
-  .add('PATCH', apiRegexpId, noopCb)
-  .add('DELETE', apiRegexpId, noopCb)
-  .add('GET', homeRegex, () => {
+  .add(verbs.get, apiRegexpId, noopCb)
+  .add(verbs.get, apiRegexp, noopCb)
+  .add(verbs.post, apiRegexp, noopCb)
+  .add(verbs.put, apiRegexpId, noopCb)
+  .add(verbs.patch, apiRegexpId, noopCb)
+  .add(verbs.delete, apiRegexpId, noopCb)
+  .add(verbs.get, homeRegex, () => {
     console.log('home sweet home');
   });
 
@@ -68,7 +69,7 @@ server.on('request', (req, res) => {
     server.getConnections((error, count) => {
       const counter = color.get(` >${count}< `, color.codes.yellow, color.codes.blue);
       process.stdout.write(
-        `${dater.getDateTime() + counter}requests \r`,
+        `${dater.getDateTime() + counter} requests \r`,
       );
     });
   }

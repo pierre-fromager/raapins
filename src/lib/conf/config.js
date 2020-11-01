@@ -1,6 +1,6 @@
 
 import path from 'path';
-import { routes } from './routes.js'
+import { routes } from '../net/routes.js'
 
 export const config = {
     dirname: path.resolve(),

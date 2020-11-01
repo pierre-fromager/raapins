@@ -7,7 +7,7 @@
 import restService from '../services/rest.js'
 import { EventEmitter } from 'events'
 import querystring from 'querystring'
-import { Cors } from './cors.js';
+import { Cors } from './net/cors.js';
 
 const corsInstance = new Cors();
 const controller = new EventEmitter();
