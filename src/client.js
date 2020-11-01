@@ -19,7 +19,7 @@ for (let i = 0; i < paralleCollectionStackSize; i += 1) {
   paralleCollectionStack.push(parallelCollectionRun);
 }
 
-console.log(`Prepare ${paralleCollectionStackSize} // connections.`);
+console.log(`Prepare ${paralleCollectionStackSize} concurrent connections.`);
 
 async.parallel(paralleCollectionStack, (err, results) => {
   if (err) {

@@ -1,35 +1,38 @@
 
-export const router = {
-    separator: '/',
-    empty: '',
-    routes: [],
-    root: '/',
-    server: null,
-    match: false,
-    req: null,
-    uri: null,
-    method: null,
-    config: function (options) {
+export class Router {
+    
+    constructor() {
+        this.separator = '/';
+        this.empty = '';
+        this.routes = [];
+        this.root = '/';
+        this.server = null;
+        this.match = false;
+        this.req = null;
+        this.uri = null;
+        this.method = null;
+     }
+    config(options) {
         this.root = (options && options.root)
             ? this.separator + this.clearUri(options.root) + this.separator
             : this.separator;
-        this.sever = (options && options.server)
+        this.server = (options && options.server)
             ? options.server
-            : this.sever;
+            : this.server;
         return this;
-    },
-    clearUri: function (path) {
+    }
+    clearUri(path) {
         return path.toString().replace(/\/$/, this.empty).replace(/^\//, this.empty);
-    },
-    add: function (method, reg, handler) {
+    }
+    add(method, reg, handler) {
         if (typeof reg == 'function') {
             handler = reg;
             reg = this.empty;
         }
         this.routes.push({ method: method, reg: reg, handler: handler });
         return this;
-    },
-    check: function (req) {
+    }
+    check(req) {
         this.req = req;
         this.uri = this.clearUri(req.url);
         this.method = req.method;

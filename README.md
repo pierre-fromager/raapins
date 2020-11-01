@@ -66,7 +66,7 @@ http://{host}/stat/{entity}
 
 ## Load simulation
 
-This simulates 90 concurent requests.  
+This simulates 90 concurrent requests.  
 
 ``` bash
 npm run client
