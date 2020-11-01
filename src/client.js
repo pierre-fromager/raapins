@@ -1,8 +1,9 @@
-const path = require('path');
-const async = require('async');
-const newman = require('newman');
 
-const fixturesPath = `${__dirname}/../fixtures/`;
+import path from 'path';
+import async from 'async';
+import newman from 'newman';
+
+const fixturesPath = `${path.resolve()}/fixtures/`;
 const parametersForTestRun = {
   collection: path.join(fixturesPath, 'postman_collection_v2.json'),
   environment: path.join(fixturesPath, 'postman_environment.json'),

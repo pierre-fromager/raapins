@@ -1,11 +1,12 @@
-const serviceManager = require('./manager');
+
+import serviceManager from './manager.js'
 
 /**
  * serviceStat
  * 
  */
-class serviceStat extends serviceManager {
-    
+export class serviceStat extends serviceManager {
+
     /**
      * constructor
      * 
@@ -17,7 +18,7 @@ class serviceStat extends serviceManager {
         super(storage, pK);
         this.stat = {};
     }
-    
+
     /**
      * svcCount
      * 
@@ -31,25 +32,23 @@ class serviceStat extends serviceManager {
         callback = (callback || this.noop);
         let collection = [];
         if (entityName && entityName != '*') {
-            counter = this.setFilter(function( obj ) {
+            counter = this.setFilter(function (obj) {
                 return (obj.entityName == entityName);
             }).count();
-            collection.push({ entityName : entityName, counter : counter});
+            collection.push({ entityName: entityName, counter: counter });
         } else {
             collection = [];
             let uniqEntities = [...new Set(this.storage.map(item => item.entityName))];
             uniqEntities.shift();
             for (var i = 0; i < uniqEntities.length; i++) {
-                counter = this.setFilter(function( obj ) {
+                counter = this.setFilter(function (obj) {
                     return (obj.entityName == uniqEntities[i]);
                 }).count();
-                collection.push({ entityName : uniqEntities[i], counter : counter});
+                collection.push({ entityName: uniqEntities[i], counter: counter });
             }
             collection = (collection.length > 0) ? collection : null;
         }
         callback(collection);
-        return(this);
+        return (this);
     };
 }
-
-module.exports = serviceStat;

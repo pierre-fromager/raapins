@@ -1,18 +1,17 @@
 
-//const http = require('http');
 import http from 'http';
-const profiler = require('./lib/profiler');
-const config = require('./lib/config');
-const color = require('./lib/color');
-const dater = require('./lib/dater');
+import { profiler } from './lib/profiler.js';
+import { config } from './lib/config.js';
+import { color } from './lib/color.js';
+import { dater } from './lib/dater.js';
+import { router } from './lib/router.js';
+import controller from './lib/controller.js';
 
 const server = http.createServer()
   .listen(config.server.port, config.server.address)
   .setTimeout(config.server.timeout);
-const router = require('./lib/router.js');
-const controller = require('./lib/controller.js');
 
-controller.setMaxListeners(config.process.maxlisteners);
+  controller.setMaxListeners(config.process.maxlisteners);
 profiler.add('starting');
 
 router.config({ root: '/' });
@@ -23,7 +22,7 @@ const statEnt = /^(stat)\/([a-zA-Z0-9_]{1,10})/;
 const apiRegexp = /^api\/v1\/([a-zA-Z0-9_]{1,10})/;
 const apiRegexpId = /^api\/v1\/([a-zA-Z0-9_]{1,10})\/(\d*)/;
 
-const noopCb = () => {};
+const noopCb = () => { };
 
 router.add('GET', statEnt, (...args) => {
   controller.setHook(

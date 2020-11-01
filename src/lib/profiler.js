@@ -4,7 +4,7 @@
  * is fluent profiler marker/calculator for ts marker
  * 
  */
-const profiler = {
+export const profiler = {
     /**
      * profiler stack
      */
@@ -47,7 +47,7 @@ const profiler = {
      * @returns {nm$_profiler.profiler}
      */
     remove(markRemove) {
-        delete(this.stack[markRemove]);
+        delete (this.stack[markRemove]);
         return this;
     },
     /**
@@ -70,5 +70,3 @@ const profiler = {
         return this.stack[markout] - this.stack[markin];
     }
 }
-
-module.exports = profiler;

@@ -3,17 +3,16 @@
  * 
  * is a front rest controller
  */
-const restService = require('./service/rest.js');
-const ctrlEmitter = require('events').EventEmitter;
 
-const service = new restService();
-const controller = new ctrlEmitter();
+import restService from './service/rest.js'
+import { EventEmitter } from 'events'
+import querystring from 'querystring'
+import { Cors } from './cors.js';
 
-const qs = require('querystring');
-//const Cors = require('./cors.js');
-import {Cors} from './cors.js';
 const corsInstance = new Cors();
-
+const controller = new EventEmitter();
+const service = new restService();
+const qs = querystring;
 const hook = {};
 
 const ctrlEnum = {
@@ -163,4 +162,4 @@ controller.handle = (router, payload) => {
     }
 };
 
-module.exports = controller;
+export default controller;

@@ -1,4 +1,5 @@
-const router = {
+
+export const router = {
     separator: '/',
     empty: '',
     routes: [],
@@ -45,5 +46,3 @@ const router = {
         return this;
     }
 }
-
-module.exports = router;

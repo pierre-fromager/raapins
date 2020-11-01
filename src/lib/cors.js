@@ -2,14 +2,14 @@
  * Cors
  * 
  */
-class Cors {
+export class Cors {
 
     /**
      * constructor
      * 
      * @returns {nm$_cors.cors}
      */
-    constructor() {}
+    constructor() { }
 
     /**
      * getHeaders
@@ -29,7 +29,3 @@ class Cors {
     }
 
 }
-
-//const cors = (typeof(cors) == 'function') ? cors : new Cors();
-
-module.exports = Cors;

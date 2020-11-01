@@ -2,7 +2,7 @@
  * serviceManager
  * 
  */
-class serviceManager {
+export default class serviceManager {
 
     /**
      * constructor
@@ -83,5 +83,3 @@ class serviceManager {
         return this;
     }
 }
-
-module.exports = serviceManager;

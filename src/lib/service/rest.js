@@ -1,4 +1,5 @@
-const serviceStat = require('./stat');
+
+import { serviceStat } from './stat.js'
 
 /**
  * serviceRest
@@ -6,7 +7,7 @@ const serviceStat = require('./stat');
  * rest service dealing rest requests without hook, returns 404 if no data.
  * 
  */
-class serviceRest extends serviceStat {
+export default class serviceRest extends serviceStat {
 
     /**
      * constructor
@@ -128,4 +129,3 @@ class serviceRest extends serviceStat {
     };
 }
 
-module.exports = serviceRest;

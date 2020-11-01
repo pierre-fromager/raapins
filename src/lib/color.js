@@ -1,38 +1,36 @@
-/**
- * color ANSI
- */
-const color = {
-    
-    fg : 0,
-    bg : 0,
-    st : 0,
+
+export const color = {
+
+    fg: 0,
+    bg: 0,
+    st: 0,
     /**
      * Ansi colors
      */
-    codes : {
-        black : 0,
-        red : 1,
-        green : 2,
-        yellow : 3,
-        blue : 4,
-        magenta : 5,
-        cyan : 6,
-        white : 7
+    codes: {
+        black: 0,
+        red: 1,
+        green: 2,
+        yellow: 3,
+        blue: 4,
+        magenta: 5,
+        cyan: 6,
+        white: 7
     },
     /**
      * Ansi styles
      */
-    styles : {
-        normal : 0,
-        bold : 1,
-        faint : 2,
-        italic : 3,
-        underline : 4,
-        slowblink : 5,
-        rapidblink : 6,
-        negative : 7,
-        conceal : 8,
-        crossedout : 9
+    styles: {
+        normal: 0,
+        bold: 1,
+        faint: 2,
+        italic: 3,
+        underline: 4,
+        slowblink: 5,
+        rapidblink: 6,
+        negative: 7,
+        conceal: 8,
+        crossedout: 9
     },
     /**
      * getAnsi returns Ansi escape seq
@@ -41,7 +39,7 @@ const color = {
      * @param {String} mode
      * @returns {String}
      */
-    getAnsi(code){
+    getAnsi(code) {
         return '\x1b[' + ((code => 30 && code <= 40) ? this.st : '') + code + 'm';
     },
     /**
@@ -65,7 +63,7 @@ const color = {
      * @param {Int} color
      * @returns {nm$_color.color}
      */
-    setFg(color){
+    setFg(color) {
         color = (color) ? color : 0;
         this.fg = 30 + color;
         return this;
@@ -76,7 +74,7 @@ const color = {
      * @param {Int} color
      * @returns {nm$_color.color}
      */
-    setBg(color){
+    setBg(color) {
         color = (color) ? color : 0;
         this.bg = 40 + color;
         return this;
@@ -87,7 +85,7 @@ const color = {
      * @param {Int} style
      * @returns {nm$_color.color}
      */
-    setSt(style){
+    setSt(style) {
         style = (this.isArray(style)) ? style.join(';') : style;
         this.st = (style) ? style + ';' : '';
         return this;
@@ -102,5 +100,3 @@ const color = {
         return (!!v) && (v.constructor === Array);
     }
 }
-
-module.exports = color;
