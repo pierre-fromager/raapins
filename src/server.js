@@ -1,11 +1,11 @@
 
 import http from 'http';
-import { profiler } from './lib/profiler';
-import { config } from './lib/config';
-import { color } from './lib/color';
-import { dater } from './lib/dater';
-import { router } from './lib/router';
-import controller from './lib/controller';
+import { profiler } from './lib/profiler.js';
+import { config } from './lib/config.js';
+import { color } from './lib/color.js';
+import { dater } from './lib/dater.js';
+import { router } from './lib/router.js';
+import controller from './lib/controller.js';
 
 const server = http.createServer()
   .listen(config.server.port, config.server.address)
