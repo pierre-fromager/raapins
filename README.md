@@ -74,6 +74,9 @@ npm run client
 
 ## Lint
 
+Caveat : eslint trigger errors when .js extension is used on import whereas nodejs requires it, if someone found a fix, pls help,I still clue on this (
+[Stackoverflow related issue](https://stackoverflow.com/questions/47105088/react-eslint-config-unexpected-file-extension-jsx)).  
+
 ``` bash
 npm run lint
 ```

@@ -17,7 +17,13 @@
             "allowTernary": true
         }
     },
+    "settings": {
+        "node": {
+            "tryExtensions": [".js", ".json", ".node"]
+        }
+    },
     "rules": {
-        "no-console": "off"
+        "no-console": "off",
+        "node/file-extension-in-import": "always"
     }
 }
