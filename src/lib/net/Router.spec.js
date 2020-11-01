@@ -7,8 +7,11 @@ const { expect, assert } = chaiPkg;
 const { describe, it } = mochaPkg;
 
 let routerInst;
-
-const instSuccMsg = 'Router is an instance of Router';
+const testMsg = {
+    inst: 'Router instance',
+    conf: 'Router config',
+    instSuccMsg: 'Router instance Ok'
+}
 
 describe('test router', () => {
 
@@ -21,14 +24,14 @@ describe('test router', () => {
         routerInst = null;
     });*/
 
-    it('Router instance', () => {
+    it(testMsg.inst, () => {
         expect(routerInst).to.be.an.instanceof(Router);
-        assert.instanceOf(routerInst, Router, instSuccMsg);
+        assert.instanceOf(routerInst, Router, testMsg.instSuccMsg);
     });
 
-    it('Router config', () => {
+    it(testMsg.conf, () => {
         expect(routerInst.config({ root: '/' })).to.be.an.instanceof(Router);
-        assert.instanceOf(routerInst, Router, instSuccMsg);
+        assert.instanceOf(routerInst, Router, testMsg.instSuccMsg);
     });
 
 });
