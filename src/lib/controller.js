@@ -4,7 +4,7 @@
  * is a front rest controller
  */
 
-import restService from './service/rest.js'
+import restService from '../services/rest.js'
 import { EventEmitter } from 'events'
 import querystring from 'querystring'
 import { Cors } from './cors.js';

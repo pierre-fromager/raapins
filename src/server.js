@@ -1,17 +1,17 @@
 
 import http from 'http';
-import { profiler } from './lib/profiler.js';
-import { config } from './lib/config.js';
-import { color } from './lib/color.js';
-import { dater } from './lib/dater.js';
-import { router } from './lib/router.js';
-import controller from './lib/controller.js';
+import { profiler } from './lib/profiler';
+import { config } from './lib/config';
+import { color } from './lib/color';
+import { dater } from './lib/dater';
+import { router } from './lib/router';
+import controller from './lib/controller';
 
 const server = http.createServer()
   .listen(config.server.port, config.server.address)
   .setTimeout(config.server.timeout);
 
-  controller.setMaxListeners(config.process.maxlisteners);
+controller.setMaxListeners(config.process.maxlisteners);
 profiler.add('starting');
 
 router.config({ root: '/' });
