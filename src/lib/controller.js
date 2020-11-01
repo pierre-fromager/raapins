@@ -10,7 +10,9 @@ const service = new restService();
 const controller = new ctrlEmitter();
 
 const qs = require('querystring');
-const cors = require('./cors.js');
+//const Cors = require('./cors.js');
+import {Cors} from './cors.js';
+const corsInstance = new Cors();
 
 const hook = {};
 
@@ -56,7 +58,7 @@ controller.methods = () => ctrlEnum.http.request.verbs
  */
 controller.action = (request) => {
     let action = null;
-    capitalizeFirstLetter = (string) =>
+    const capitalizeFirstLetter = (string) =>
         string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 
     if (controller.hook) {
@@ -106,12 +108,12 @@ controller.isHooked = () => controller.hook != null
 controller.listen = (controllerInstance, router, res, reqRawData) => {
 
     controllerInstance.once(ctrlEnum.data, (data) => {
-        res.writeHead(200, cors.getHeaders());
+        res.writeHead(200, corsInstance.getHeaders());
         res.end(JSON.stringify(data));
     });
 
     controllerInstance.once(ctrlEnum.error, (errorType) => {
-        res.writeHead(errorType, cors.getHeaders());
+        res.writeHead(errorType, corsInstance.getHeaders());
         res.end();
     });
 

@@ -2,7 +2,7 @@ const router = {
     separator: '/',
     empty: '',
     routes: [],
-    root: this.separator,
+    root: '/',
     server: null,
     match: false,
     req: null,

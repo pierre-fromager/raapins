@@ -1,5 +1,6 @@
 
-const http = require('http');
+//const http = require('http');
+import http from 'http';
 const profiler = require('./lib/profiler');
 const config = require('./lib/config');
 const color = require('./lib/color');

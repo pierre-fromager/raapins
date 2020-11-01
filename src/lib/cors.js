@@ -30,6 +30,6 @@ class Cors {
 
 }
 
-cors = (typeof(cors) == 'function') ? cors : new Cors();
+//const cors = (typeof(cors) == 'function') ? cors : new Cors();
 
-module.exports = cors;
+module.exports = Cors;
