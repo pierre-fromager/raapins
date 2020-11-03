@@ -15,20 +15,18 @@ const testMsg = {
     clearUriMsg: 'Router clearUri Ok',
 }
 
+describe('Router', () => {
 
+    beforeEach(() => {
+        routerInst = new Router();
+    })
 
-describe('test router', () => {
+    afterEach((done) => {
+        routerInst = null;
+        done();
+    });
 
     describe('config', () => {
-
-        beforeEach(() => {
-            routerInst = new Router();
-        })
-
-        /*
-        afterEach(function (done) {
-            routerInst = null;
-        });*/
 
         it(testMsg.inst, () => {
             const exptected = '/';
@@ -49,19 +47,19 @@ describe('test router', () => {
     describe('clearUri', () => {
 
         const routerClearUriDataProvider = [
-            { p: "", r: "" },
-            { p: "/", r: "" },           
+            { p: '', r: '' },
+            { p: '/', r: '' },
+            { p: '/stat', r: 'stat' },
+            { p: '/stat/girl', r: 'stat/girl' },
+            { p: '/stat/girl/', r: 'stat/girl' },
+            { p: '/api/v1/girl/10', r: 'api/v1/girl/10' },
+            { p: '/api/v1/girl/10/', r: 'api/v1/girl/10' },
         ];
 
-        beforeEach(() => {
-            routerInst = new Router();
-        })
-
         routerClearUriDataProvider.forEach(({ p, r }) => {
-            it(`${testMsg.clear} with ${p} should return ${r}`, () => {
+            it(`${testMsg.clear} with '${p}' should return '${r}'`, () => {
                 expect(routerInst.clearUri(p)).to.equal(r);
             });
         });
-
     })
 });
