@@ -1,6 +1,6 @@
 
 export class Router {
-    
+
     constructor() {
         this.separator = '/';
         this.empty = '';
@@ -11,7 +11,8 @@ export class Router {
         this.req = null;
         this.uri = null;
         this.method = null;
-     }
+    }
+
     config(options) {
         this.root = (options && options.root)
             ? this.separator + this.clearUri(options.root) + this.separator
@@ -21,9 +22,11 @@ export class Router {
             : this.server;
         return this;
     }
+
     clearUri(path) {
         return path.toString().replace(/\/$/, this.empty).replace(/^\//, this.empty);
     }
+
     add(method, reg, handler) {
         if (typeof reg == 'function') {
             handler = reg;
@@ -32,6 +35,7 @@ export class Router {
         this.routes.push({ method: method, reg: reg, handler: handler });
         return this;
     }
+    
     check(req) {
         this.req = req;
         this.uri = this.clearUri(req.url);

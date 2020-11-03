@@ -10,28 +10,58 @@ let routerInst;
 const testMsg = {
     inst: 'Router instance',
     conf: 'Router config',
-    instSuccMsg: 'Router instance Ok'
+    clear: 'Router clearUri',
+    instSuccMsg: 'Router instance Ok',
+    clearUriMsg: 'Router clearUri Ok',
 }
+
+
 
 describe('test router', () => {
 
-    beforeEach(() => {
-        routerInst = new Router();
+    describe('config', () => {
+
+        beforeEach(() => {
+            routerInst = new Router();
+        })
+
+        /*
+        afterEach(function (done) {
+            routerInst = null;
+        });*/
+
+        it(testMsg.inst, () => {
+            const exptected = '/';
+            expect(routerInst).to.be.an.instanceof(Router);
+            assert.instanceOf(routerInst, Router, testMsg.instSuccMsg);
+            expect(routerInst.root).to.be.equal(exptected);
+        });
+
+        it(testMsg.conf, () => {
+            const provider = '/test';
+            const exptected = '/test/';
+            expect(routerInst.config({ root: provider })).to.be.an.instanceof(Router);
+            assert.instanceOf(routerInst, Router, testMsg.instSuccMsg);
+            expect(routerInst.root).to.be.equal(exptected);
+        });
     })
 
-    /*
-    afterEach(function (done) {
-        routerInst = null;
-    });*/
+    describe('clearUri', () => {
 
-    it(testMsg.inst, () => {
-        expect(routerInst).to.be.an.instanceof(Router);
-        assert.instanceOf(routerInst, Router, testMsg.instSuccMsg);
-    });
+        const routerClearUriDataProvider = [
+            { p: "", r: "" },
+            { p: "/", r: "" },           
+        ];
 
-    it(testMsg.conf, () => {
-        expect(routerInst.config({ root: '/' })).to.be.an.instanceof(Router);
-        assert.instanceOf(routerInst, Router, testMsg.instSuccMsg);
-    });
+        beforeEach(() => {
+            routerInst = new Router();
+        })
 
+        routerClearUriDataProvider.forEach(({ p, r }) => {
+            it(`${testMsg.clear} with ${p} should return ${r}`, () => {
+                expect(routerInst.clearUri(p)).to.equal(r);
+            });
+        });
+
+    })
 });
